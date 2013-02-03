@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="raindrop_locale.query_guesser" class="%raindrop_locale.query_guesser.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument>%raindrop_locale.query.parameter_name%</argument>
+            <tag name="raindrop_locale.guesser" alias="query"/>
+        </service>
+
+        <service id="raindrop_locale.router_guesser" class="%raindrop_locale.router_guesser.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <tag name="raindrop_locale.guesser" alias="router"/>
+        </service>
+
+        <service id="raindrop_locale.browser_guesser" class="%raindrop_locale.browser_guesser.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <tag name="raindrop_locale.guesser" alias="browser"/>
+        </service>
+
+        <service id="raindrop_locale.cookie_guesser" class="%raindrop_locale.cookie_guesser.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument>%raindrop_locale.cookie.name%</argument>
+            <tag name="raindrop_locale.guesser" alias="cookie"/>
+        </service>
+
+        <service id="raindrop_locale.session_guesser" class="%raindrop_locale.session_guesser.class%">
+            <argument type="service" id="session"/>
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument>%raindrop_locale.session.variable%</argument>
+            <tag name="raindrop_locale.guesser" alias="session"/>
+        </service>
+        
+        <service id="raindrop_locale.geoip_guesser" class="Raindrop\LocaleBundle\LocaleGuesser\GeoipLocaleGuesser">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument type="service" id="raindrop.geoip" />
+            <tag name="raindrop_locale.guesser" alias="geoip" />
+        </service>        
+
+    </services>
+</container>

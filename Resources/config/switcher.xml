@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="raindrop_locale.switcher_helper"
+                 class="Raindrop\LocaleBundle\Templating\Helper\LocaleSwitchHelper">
+            <argument type="service" id="templating"/>
+            <argument>%raindrop_locale.switcher.template%</argument>
+            <tag name="templating.helper" alias="switch"/>
+        </service>
+
+        <service id="raindrop_locale.twig.switcher"
+                 class="Raindrop\LocaleBundle\Twig\Extension\LocaleSwitcherExtension">
+            <argument type="service" id="service_container"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="raindrop_locale.switcher_controller" class="Raindrop\LocaleBundle\Controller\LocaleController" scope="request">
+            <argument type="service" id="router"/>
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument>%raindrop_locale.switcher.use_referrer%</argument>
+            <argument>%raindrop_locale.switcher.redirect_to_route%</argument>
+            <argument>%raindrop_locale.switcher.redirect_statuscode%</argument>
+        </service>
+
+    </services>
+</container>

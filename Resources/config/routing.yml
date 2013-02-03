@@ -1,0 +1,5 @@
+raindrop_locale_switcher:
+    pattern: /changeLocale/{_locale}
+    defaults:
+        _controller: raindrop_locale.switcher_controller:switchAction
+        _locale: %locale%
