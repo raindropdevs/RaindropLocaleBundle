@@ -1,0 +1,29 @@
+{
+    "name": "raindrop/locale-bundle",
+    "description": "Raindrop Locale Symfony2 Bundle",
+    "type": "symfony-bundle",
+    "keywords": ["locale", "language", "multilanguage", "cookie", "session"],
+    "homepage": " ",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raindrop",
+            "email": " "
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "symfony/finder": "2.2.*",
+        "symfony/yaml": "2.2.*",
+        "symfony/browser-kit": "2.2.*",
+        "symfony/locale": ">=2.1,<2.3-dev",
+        "symfony/validator": ">=2.1,<2.3-dev",
+        "ext-intl": "*"
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Raindrop/LocaleBundle",
+    "autoload": {
+        "psr-0": { "Raindrop\\LocaleBundle": "" }
+    }
+}

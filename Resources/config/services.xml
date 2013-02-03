@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<parameters>
+        <parameter key="raindrop_locale.request_listener.class">Raindrop\LocaleBundle\EventListener\LocaleListener</parameter>
+        <parameter key="raindrop_locale.guesser_manager.class">Raindrop\LocaleBundle\LocaleGuesser\LocaleGuesserManager</parameter>
+        <parameter key="raindrop_locale.information.class">Raindrop\LocaleBundle\LocaleInformaion\LocaleInformation</parameter>
+    </parameters>
+    <services>
+
+        <service id="raindrop_locale.guesser_manager" class="%raindrop_locale.guesser_manager.class%">
+            <argument>%raindrop_locale.guessing_order%</argument>
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="raindrop_locale.information" class="%raindrop_locale.information.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <argument>%raindrop_locale.allowed_locales%</argument>
+        </service>
+
+        <service id="raindrop_locale.locale_cookie" class="%raindrop_locale.cookie.class%">
+            <argument>%raindrop_locale.cookie.name%</argument>
+            <argument>%raindrop_locale.cookie.ttl%</argument>
+            <argument>%raindrop_locale.cookie.path%</argument>
+            <argument>%raindrop_locale.cookie.domain%</argument>
+            <argument>%raindrop_locale.cookie.secure%</argument>
+            <argument>%raindrop_locale.cookie.httpOnly%</argument>
+            <argument>%raindrop_locale.cookie.set_on_change%</argument>
+        </service>
+
+        <service id="raindrop_locale.locale_session" class="Raindrop\LocaleBundle\Session\LocaleSession">
+            <argument type="service" id="session" />
+            <argument>%raindrop_locale.session.variable%</argument>
+        </service>
+
+        <service id="raindrop_locale.locale_listener" class="%raindrop_locale.request_listener.class%">
+            <argument>%kernel.default_locale%</argument>
+            <argument type="service" id="raindrop_locale.guesser_manager" />
+            <argument type="service" id="logger" />
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="raindrop_locale.locale_update_listener" class="Raindrop\LocaleBundle\EventListener\LocaleUpdateListener">
+            <argument type="service" id="raindrop_locale.locale_cookie" />
+            <argument type="service" id="raindrop_locale.locale_session" />
+            <argument type="service" id="event_dispatcher" />
+            <argument>%raindrop_locale.guessing_order%</argument>
+            <argument type="service" id="logger" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>
