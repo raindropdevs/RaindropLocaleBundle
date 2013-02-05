@@ -19,6 +19,7 @@
         "symfony/browser-kit": "2.2.*",
         "symfony/locale": ">=2.1,<2.3-dev",
         "symfony/validator": ">=2.1,<2.3-dev",
+        "symfony/http-foundation": "2.2.x-dev",
         "ext-intl": "*"
     },
     "minimum-stability": "dev",
