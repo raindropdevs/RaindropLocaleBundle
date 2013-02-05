@@ -1,5 +1,7 @@
 # Raindrop Locale Bundle #
 
+[![Build Status](https://travis-ci.org/raindropdevs/RaindropLocaleBundle.png?branch=master)](https://travis-ci.org/raindropdevs/RaindropLocaleBundle)
+
 This is a clone of [Lunetics Locale Bundle](https://github.com/lunetics/LocaleBundle).
 
 To install this bundle please follow the next steps:
