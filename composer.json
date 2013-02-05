@@ -3,12 +3,12 @@
     "description": "Raindrop Locale Symfony2 Bundle",
     "type": "symfony-bundle",
     "keywords": ["locale", "language", "multilanguage", "cookie", "session"],
-    "homepage": " ",
+    "homepage": "https://github.com/raindropdevs",
     "license": "MIT",
     "authors": [
         {
             "name": "Raindrop",
-            "email": " "
+            "homepage": "https://github.com/raindropdevs/RaindropLocaleBundle/graphs/contributors"
         }
     ],
     "require": {
