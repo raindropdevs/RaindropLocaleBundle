@@ -1,5 +1,7 @@
 # Raindrop Locale Bundle #
 
+This is a clone of [Lunetics Locale Bundle](https://github.com/lunetics/LocaleBundle).
+
 To install this bundle please follow the next steps:
 
 First add the dependency to your `composer.json` file:
