@@ -50,10 +50,11 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
     public function guessLocale(Request $request)
     {
         $validator = $this->metaValidator;
+        $geoip = $this->geoip;
 
         $clientIp = $request->getClientIp();
         // Get the country code / locale
-        $countryCode = strtolower($this->geoip->getCountryCode($clientIp));
+        $countryCode = strtolower($geoip->getCountryCode($clientIp));
 
         if (empty($countryCode)) {
             return false;
