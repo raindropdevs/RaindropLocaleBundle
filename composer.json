@@ -20,6 +20,7 @@
         "symfony/locale": ">=2.1,<2.3-dev",
         "symfony/validator": ">=2.1,<2.3-dev",
         "symfony/http-foundation": "2.2.x-dev",
+        "raindrop/geoip-bundle": "dev-master",
         "ext-intl": "*"
     },
     "minimum-stability": "dev",
