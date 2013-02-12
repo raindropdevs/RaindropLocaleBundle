@@ -2,35 +2,35 @@
 
 [![Build Status](https://travis-ci.org/raindropdevs/RaindropLocaleBundle.png?branch=master)](https://travis-ci.org/raindropdevs/RaindropLocaleBundle)
 
-This is a clone of [Lunetics Locale Bundle](https://github.com/lunetics/LocaleBundle).
+This bundle is a fork of LuneticsLocaleBundle which allows you to guess the Locale from different parameters in your Symfony2 applications.
 
-To install this bundle please follow the next steps:
+# Installation
 
-First add the dependency to your `composer.json` file:
+### Add the package to your dependencies
 
-    "require": {
-        ...
-        "raindrop/locale-bundle": "dev-master"
-    },
+``` yaml
+"require": {
+    "raindrop/locale-bundle": "dev-master",
+    ....
+},
+```
 
-Then install the bundle with the command:
+### Register the bundle in your kernel
 
-    php composer.phar update
-
-Enable the bundle in your application kernel:
-
-    <?php
-    // app/AppKernel.php
-
-    public function registerBundles()
+``` php
+public function registerBundles()
     {
         $bundles = array(
             // ...
             new Raindrop\LocaleBundle\RaindropLocaleBundle(),
         );
-    }
+```
 
-Now the bundle is enabled.
+### Update your packages
+
+```
+php composer.phar update raindrop/locale-bundle
+```
 
 # Configuration
 
@@ -71,6 +71,7 @@ raindrop_locale:
     - browser
     - query
     - router
+    - geoip
 ```
 With the example above, the guessers will be called in the order you defined as 1. session 2. cookie 2. router 3. browser.
 
@@ -85,6 +86,7 @@ raindrop_locale:
     - router
     - session
     - cookie
+    - geoip
     - browser
 ```
 
@@ -108,14 +110,17 @@ This is most useful for unregistered and returning visitors.
 
 The session guesser will automatically save a previously identified locale into the session and retrieve it from the session. This guesser should always be first in your `guessing_order` configuration if you don't use the router guesser.
 
+#### Geoip
+The geoip guesser retrieve the locale from the country code of client ip.
+
 ### FilterLocaleSwitchEvent / LocaleUpdateListener
 The `LocaleGuesserManager` dispatches a `LocaleBundleEvents::onLocalChange` if you use either the 'session' or `cookie` guesser. The LocaleUpdateListeners checks if the locale has changed and updates the session or cookie.
 
 
-For example, if you don't use route / query parameters for locales, you could build an own listener for your user login, which dispatches a `RaindropLocaleBundleEvents::onLocalChange` event to set the locale for your user. You just have to use the `FilterLocaleSwitchEvent` and set the locale.
+For example, if you don't use route / query parameters for locales, you could build an own listener for your user login, which dispatches a `LocaleBundleEvents::onLocalChange` event to set the locale for your user. You just have to use the `FilterLocaleSwitchEvent` and set the locale.
 
 ``` php
 $locale = $user->getLocale();
 $localeSwitchEvent = new FilterLocaleSwitchEvent($locale);
-$this->dispatcher->dispatch(RaindropLocaleBundleEvents::onLocaleChange, $localeSwitchEvent);
+$this->dispatcher->dispatch(LocaleBundleEvents::onLocaleChange, $localeSwitchEvent);
 ```
