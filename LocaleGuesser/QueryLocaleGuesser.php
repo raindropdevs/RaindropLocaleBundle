@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Raindrop\LocaleBundle\Validator\MetaValidator;
 
 /**
- * This guesser class checks the session for a var
+ * This guesser class checks the query parameter for a var
  *
  * @author Matthias Breddin <mb@Raindrop.com>
  */
@@ -40,7 +40,7 @@ class QueryLocaleGuesser implements LocaleGuesserInterface
     }
 
     /**
-     * Guess the locale based on the session variable
+     * Guess the locale based on the query parameter variable
      *
      * @param Request $request
      *
