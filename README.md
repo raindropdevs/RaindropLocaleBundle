@@ -124,3 +124,19 @@ $locale = $user->getLocale();
 $localeSwitchEvent = new FilterLocaleSwitchEvent($locale);
 $this->dispatcher->dispatch(LocaleBundleEvents::onLocaleChange, $localeSwitchEvent);
 ```
+
+### Custom Guessers
+
+Read more about creating your own guesser here:
+
+[Read the full documentation for creating a custom Locale Guesser](guesser.md)
+
+### Switch to another locale
+
+You can render a default locale switcher, simply by calling the twig function in your template :
+
+``` html
+{{ locale_switcher() }}
+```
+
+[Read the full documentation for the switcher](switcher.md)

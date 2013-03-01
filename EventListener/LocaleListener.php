@@ -16,7 +16,6 @@ use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 
 /**
  * Locale Listener
- *
  */
 class LocaleListener implements EventSubscriberInterface
 {
