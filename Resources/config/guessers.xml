@@ -33,11 +33,5 @@
             <tag name="raindrop_locale.guesser" alias="session"/>
         </service>
         
-        <service id="raindrop_locale.geoip_guesser" class="Raindrop\LocaleBundle\LocaleGuesser\GeoipLocaleGuesser">
-            <argument type="service" id="raindrop_locale.validator.meta" />
-            <argument type="service" id="raindrop.geoip" />
-            <tag name="raindrop_locale.guesser" alias="geoip" />
-        </service>        
-
     </services>
 </container>
