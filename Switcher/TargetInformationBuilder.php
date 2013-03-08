@@ -72,6 +72,7 @@ class TargetInformationBuilder
         }
 
         $infos['current_locale'] = $request->getLocale();
+        $infos['current_language'] = Locale::getDisplayLanguage($request->getLocale(), $request->getLocale());
         $infos['current_route'] = $route;
         $infos['locales'] = array();
 
