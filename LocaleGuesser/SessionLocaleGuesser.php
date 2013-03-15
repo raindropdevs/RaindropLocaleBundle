@@ -39,7 +39,7 @@ class SessionLocaleGuesser implements LocaleGuesserInterface
      * @param MetaValidator $metaValidator   MetaValidator
      * @param string        $sessionVariable Key value for the Session
      */
-    public function __construct(Session $session, MetaValidator $metaValidator, $sessionVariable = 'Raindrop_locale')
+    public function __construct(Session $session, MetaValidator $metaValidator, $sessionVariable = 'raindrop_locale')
     {
         $this->metaValidator = $metaValidator;
         $this->session = $session;
