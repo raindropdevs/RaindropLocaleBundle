@@ -46,6 +46,11 @@ class Country
     protected $languages;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Language")
+     */
+    private $defaultLanguage;
+
+    /**
      * Constructor.
      */
     public function __construct() 
@@ -133,6 +138,24 @@ class Country
     public function getLanguages()
     {
         return $this->languages;
+    }
+
+    /**
+     * Set $defaultLanguage
+     *
+     * @param Language $defaultLanguage
+     */
+    public function setDefaultLanguage($defaultLanguage)
+    {
+        $this->defaultLanguage = $defaultLanguage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultLanguage()
+    {
+        return $this->defaultLanguage;
     }
 
     /**

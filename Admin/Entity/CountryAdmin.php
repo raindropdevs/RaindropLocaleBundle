@@ -20,6 +20,7 @@ class CountryAdmin extends Admin
         $listMapper
             ->addIdentifier('code')
             ->add('name')
+            ->add('defaultLanguage')
             ->add('languages');
     }
     
@@ -31,8 +32,9 @@ class CountryAdmin extends Admin
         $formMapper
             ->add('code')
             ->add('name')
-            ->add('enabled')
-            ->add('languages');
+            ->add('enabled', null, array('required' => false))
+            ->add('defaultLanguage', null, array('required' => false))
+            ->add('languages', null, array('required' => false));
     }   
     
     /**
