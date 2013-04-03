@@ -40,7 +40,7 @@ class Country
     protected $enabled = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Language", inversedBy="countries")
+     * @ORM\ManyToMany(targetEntity="Language")
      */
     protected $languages;
     
