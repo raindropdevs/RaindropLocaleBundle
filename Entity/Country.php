@@ -41,7 +41,6 @@ class Country
 
     /**
      * @ORM\ManyToMany(targetEntity="Language", inversedBy="countries")
-     * @ORM\JoinTable(name="countries_languages")
      */
     protected $languages;
     
