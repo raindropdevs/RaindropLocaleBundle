@@ -91,5 +91,13 @@ class Country
     public function getCode()
     {
         return $this->code;
-    }      
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
