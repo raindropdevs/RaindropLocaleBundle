@@ -2,7 +2,7 @@
     "name": "raindrop/locale-bundle",
     "description": "Raindrop Locale Symfony2 Bundle",
     "type": "symfony-bundle",
-    "keywords": ["locale", "language", "multilanguage", "cookie", "session"],
+    "keywords": ["locale", "bundle", "multilanguage", "router", "browser", "cookie", "language"],
     "homepage": "https://github.com/raindropdevs",
     "license": "MIT",
     "authors": [
@@ -11,23 +11,24 @@
             "homepage": "https://github.com/raindropdevs/RaindropLocaleBundle/graphs/contributors"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
-        "symfony/framework-bundle": ">=2.1,<2.3-dev",
-        "symfony/yaml": ">=2.1,<2.3-dev",
-        "symfony/locale": ">=2.1,<2.3-dev",
-        "symfony/validator": ">=2.1,<2.3-dev"
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.1,<2.4-dev",
+        "symfony/yaml": ">=2.1,<2.4-dev",
+        "symfony/locale": ">=2.1,<2.4-dev",
+        "symfony/validator": ">=2.1,<2.4-dev"
     },
     "require-dev": {
         "twig/twig": "1.*",
-        "ext-intl": "*"
+        "ext-intl": "*",
+        "symfony/form": ">=2.1,<2.4-dev"
     },
     "suggest": {
         "ext-intl": "Needed for displaying the countryname in the locale language"
     },    
-    "minimum-stability": "dev",
-    "target-dir": "Raindrop/LocaleBundle",
     "autoload": {
         "psr-0": { "Raindrop\\LocaleBundle": "" }
-    }
+    },
+    "target-dir": "Raindrop/LocaleBundle"
 }
