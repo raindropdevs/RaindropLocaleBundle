@@ -87,7 +87,7 @@ class LocaleUpdateTest extends \PHPUnit_Framework_TestCase
         /** @var $cookie \Symfony\Component\HttpFoundation\Cookie */
         list($cookie) = $response->headers->getCookies();
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Cookie', $cookie);
-        $this->assertEquals('Raindrop_locale', $cookie->getName());
+        $this->assertEquals('raindrop_locale', $cookie->getName());
         $this->assertEquals('es', $cookie->getValue());
 
     }
@@ -154,14 +154,14 @@ class LocaleUpdateTest extends \PHPUnit_Framework_TestCase
 
     private function getLocaleCookie($updateCookie)
     {
-        $cookie = new LocaleCookie('Raindrop_locale', 86400, '/', null, false, true, $updateCookie);
+        $cookie = new LocaleCookie('raindrop_locale', 86400, '/', null, false, true, $updateCookie);
 
         return $cookie;
     }
 
     private function getRequest($withCookieSet = false)
     {
-        $request = Request::create('/', 'GET', array(), $withCookieSet ? array('Raindrop_locale' => 'de') : array());
+        $request = Request::create('/', 'GET', array(), $withCookieSet ? array('raindrop_locale' => 'de') : array());
 
         return $request;
     }

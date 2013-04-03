@@ -55,7 +55,7 @@ class SessionLocaleGuesserTest extends \PHPUnit_Framework_TestCase
     private function getRequestWithSessionLocale($locale = 'ru')
     {
         $session = new Session(new MockArraySessionStorage());
-        $session->set('Raindrop_locale', $locale);
+        $session->set('raindrop_locale', $locale);
         $request = Request::create('/');
         $request->setSession($session);
         $request->headers->set('Accept-language', 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4');

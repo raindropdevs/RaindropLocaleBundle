@@ -18,7 +18,7 @@ class CookieLocaleGuesserTest extends \PHPUnit_Framework_TestCase
                 ->with('ru')
                 ->will($this->returnValue(true));
 
-        $guesser = new CookieLocaleGuesser($metaValidator, 'Raindrop_locale');
+        $guesser = new CookieLocaleGuesser($metaValidator, 'raindrop_locale');
 
         $this->assertTrue($guesser->guessLocale($request));
         $this->assertEquals('ru', $guesser->getIdentifiedLocale());
@@ -34,7 +34,7 @@ class CookieLocaleGuesserTest extends \PHPUnit_Framework_TestCase
                 ->with('ru')
                 ->will($this->returnValue(false));
 
-        $guesser = new CookieLocaleGuesser($metaValidator, 'Raindrop_locale');
+        $guesser = new CookieLocaleGuesser($metaValidator, 'raindrop_locale');
 
         $this->assertFalse($guesser->guessLocale($request));
         $this->assertFalse($guesser->getIdentifiedLocale());
@@ -48,7 +48,7 @@ class CookieLocaleGuesserTest extends \PHPUnit_Framework_TestCase
         $metaValidator->expects($this->never())
                 ->method('isAllowed');
 
-        $guesser = new CookieLocaleGuesser($metaValidator, 'Raindrop_locale');
+        $guesser = new CookieLocaleGuesser($metaValidator, 'raindrop_locale');
 
         $this->assertFalse($guesser->guessLocale($request));
         $this->assertFalse($guesser->getIdentifiedLocale());
@@ -58,7 +58,7 @@ class CookieLocaleGuesserTest extends \PHPUnit_Framework_TestCase
     {
         $request = Request::create('/');
         if ($withLocaleCookie) {
-            $request->cookies->set('Raindrop_locale', 'ru');
+            $request->cookies->set('raindrop_locale', 'ru');
         }
 
         return $request;

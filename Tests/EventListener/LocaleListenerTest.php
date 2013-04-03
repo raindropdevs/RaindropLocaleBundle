@@ -190,7 +190,7 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
         $manager = new LocaleGuesserManager($order);
         $routerGuesser = new RouterLocaleGuesser($metaValidator);
         $browserGuesser = new BrowserLocaleGuesser($metaValidator);
-        $cookieGuesser = new CookieLocaleGuesser($metaValidator, 'Raindrop_locale');
+        $cookieGuesser = new CookieLocaleGuesser($metaValidator, 'raindrop_locale');
         $queryGuesser = new QueryLocaleGuesser($metaValidator, '_locale');
         $manager->addGuesser($queryGuesser, 'query');
         $manager->addGuesser($routerGuesser, 'router');
