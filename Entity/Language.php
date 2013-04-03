@@ -34,19 +34,6 @@ class Language
     protected $code;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Country", mappedBy="languages")
-     */
-    protected $countries;
-    
-    /**
-     * Constructor.
-     */    
-    public function __construct() 
-    {
-        $this->countries = new ArrayCollection();
-    }     
-    
-    /**
      * Returns the country unique id.
      *
      * @return integer
@@ -91,12 +78,12 @@ class Language
     {
         return $this->code;
     }   
-
+    
     /**
      * @return string
      */
     public function __toString()
     {
-        return $this->getName();
+        return sprintf("%s", $this->getName());
     }
 }

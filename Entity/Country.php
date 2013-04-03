@@ -5,6 +5,7 @@ namespace Raindrop\LocaleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Raindrop\LocaleBundle\Entity\Language;
 
 /**
  * @ORM\Entity(repositoryClass="CountryRepository")
@@ -92,12 +93,30 @@ class Country
     {
         return $this->code;
     }
+    
+    /**
+     * Add language
+     *
+     * @param Raindrop\LocaleBundle\Entity\Language $language
+     */
+    public function addLanguage(Language $language)
+    {
+        $this->languages[] = $language;
+    }    
+    
+    /**
+     * @return string
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
 
     /**
      * @return string
      */
     public function __toString()
     {
-        return $this->getName();
+        return sprintf("%s", $this->getName());
     }
 }
