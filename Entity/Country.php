@@ -35,6 +35,11 @@ class Country
     protected $code;
     
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $enabled = false;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Language", inversedBy="countries")
      * @ORM\JoinTable(name="countries_languages")
      */
@@ -93,6 +98,24 @@ class Country
     {
         return $this->code;
     }
+    
+    /**
+     * Set $enabled
+     * 
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }    
     
     /**
      * Add language

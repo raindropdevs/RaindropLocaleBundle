@@ -31,6 +31,7 @@ class CountryAdmin extends Admin
         $formMapper
             ->add('code')
             ->add('name')
+            ->add('enabled')
             ->add('languages');
     }   
     
