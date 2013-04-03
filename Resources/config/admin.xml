@@ -10,6 +10,8 @@
         <parameter key="raindrop_locale.country.admin.class">Raindrop\LocaleBundle\Admin\Entity\CountryAdmin</parameter>
         <parameter key="raindrop_locale.language.class">Raindrop\LocaleBundle\Entity\Language</parameter>
         <parameter key="raindrop_locale.language.admin.class">Raindrop\LocaleBundle\Admin\Entity\LanguageAdmin</parameter>
+        <parameter key="raindrop_locale.international.class">Raindrop\LocaleBundle\Entity\International</parameter>
+        <parameter key="raindrop_locale.international.admin.class">Raindrop\LocaleBundle\Admin\Entity\InternationalAdmin</parameter>
     </parameters>
 
     <services>
@@ -30,6 +32,16 @@
           <argument>SonataAdminBundle:CRUD</argument>
 
           <tag name="sonata.admin" manager_type="orm" group="Country" label="Language"/>
+
+      </service>
+
+       <service id="raindrop_locale.international.admin" class="%raindrop_locale.international.admin.class%">
+
+          <argument />
+          <argument>%raindrop_locale.international.class%</argument>
+          <argument>SonataAdminBundle:CRUD</argument>
+
+          <tag name="sonata.admin" manager_type="orm" group="Country" label="International"/>
 
       </service>
     </services>
