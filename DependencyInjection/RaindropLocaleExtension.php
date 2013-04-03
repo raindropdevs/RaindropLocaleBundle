@@ -44,12 +44,14 @@ class RaindropLocaleExtension extends Extension
         $container->setParameter('raindrop_locale.intl_extension_fallback.iso639', $mergedValues);
         $container->setParameter('raindrop_locale.intl_extension_fallback.script', $localeScript);
 
-
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
         $loader->load('validator.xml');
         $loader->load('guessers.xml');
         $loader->load('services.xml');
         $loader->load('switcher.xml');
+
+        if (class_exists('Sonata\\AdminBundle\\Admin\\Admin')) $loader->load('admin.xml');
     }
     /**
      * {@inheritDoc}
