@@ -26,7 +26,8 @@
     },
     "suggest": {
         "ext-intl": "Needed for displaying the countryname in the locale language",
-        "doctrine/doctrine-fixtures-bundle": "Needed for loading countries/languages fixtures"
+        "doctrine/doctrine-fixtures-bundle": "Needed for loading countries/languages fixtures",
+        "sonata-project/admin-bundle": "Sonata Admin support"
     },    
     "autoload": {
         "psr-0": { "Raindrop\\LocaleBundle": "" }
