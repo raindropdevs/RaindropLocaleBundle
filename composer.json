@@ -25,7 +25,8 @@
         "symfony/form": ">=2.1,<2.4-dev"
     },
     "suggest": {
-        "ext-intl": "Needed for displaying the countryname in the locale language"
+        "ext-intl": "Needed for displaying the countryname in the locale language",
+        "doctrine/doctrine-fixtures-bundle": "Needed for loading countries/languages fixtures"
     },    
     "autoload": {
         "psr-0": { "Raindrop\\LocaleBundle": "" }
