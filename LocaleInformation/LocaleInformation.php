@@ -5,6 +5,7 @@ namespace Raindrop\LocaleBundle\LocaleInformation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Locale\Locale;
 use Raindrop\LocaleBundle\Validator\MetaValidator;
+use Raindrop\LocaleBundle\Provider\AllowedLocalesProvider;
 
 /**
  * Information about Locales
@@ -18,10 +19,10 @@ class LocaleInformation
      * @param MetaValidator $metaValidator  Validator
      * @param array         $allowedLocales Allowed locales from config
      */
-    public function __construct(MetaValidator $metaValidator, $allowedLocales = array())
+    public function __construct(MetaValidator $metaValidator, AllowedLocalesProvider $allowedLocales)
     {
         $this->metaValidator = $metaValidator;
-        $this->allowedLocales = $allowedLocales;
+        $this->allowedLocales = $allowedLocales->getAllowedLocalesFromDatabase();
     }
 
     /**

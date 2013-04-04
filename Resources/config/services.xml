@@ -6,6 +6,7 @@
         <parameter key="raindrop_locale.request_listener.class">Raindrop\LocaleBundle\EventListener\LocaleListener</parameter>
         <parameter key="raindrop_locale.guesser_manager.class">Raindrop\LocaleBundle\LocaleGuesser\LocaleGuesserManager</parameter>
         <parameter key="raindrop_locale.information.class">Raindrop\LocaleBundle\LocaleInformaion\LocaleInformation</parameter>
+        <parameter key="raindrop_locale.allowed_locales.provider.class">Raindrop\LocaleBundle\Provider\AllowedLocalesProvider</parameter>
     </parameters>
 
     <services>
@@ -17,7 +18,7 @@
 
         <service id="raindrop_locale.information" class="%raindrop_locale.information.class%">
             <argument type="service" id="raindrop_locale.validator.meta" />
-            <argument>%raindrop_locale.allowed_locales%</argument>
+            <argument type="service" id="raindrop_locale.allowed_locales.provider" />
         </service>
 
         <service id="raindrop_locale.locale_cookie" class="%raindrop_locale.cookie.class%">
@@ -52,6 +53,11 @@
             <argument>%raindrop_locale.guessing_order%</argument>
             <argument type="service" id="logger" />
             <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="raindrop_locale.allowed_locales.provider" class="%raindrop_locale.allowed_locales.provider.class%">
+            <argument type="service" id="logger" />
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
     </services>
 </container>

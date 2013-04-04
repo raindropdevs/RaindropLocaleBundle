@@ -5,6 +5,7 @@ namespace Raindrop\LocaleBundle\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Raindrop\LocaleBundle\Provider\AllowedLocalesProvider;
 
 /**
  * Validator to check if a locale is allowed by the configuration
@@ -34,9 +35,9 @@ class LocaleAllowedValidator extends ConstraintValidator
      * @param bool  $strictMode     Match locales strict (e.g. de_DE will not match allowedLocale de)
      * @param bool  $intlExtension  Wether the intl extension is installed
      */
-    public function __construct(array $allowedLocales = array(), $strictMode = false, $intlExtension = false)
+    public function __construct(AllowedLocalesProvider $allowedLocales, $strictMode = false, $intlExtension = false)
     {
-        $this->allowedLocales = $allowedLocales;
+        $this->allowedLocales = $allowedLocales->getAllowedLocalesFromDatabase();
         $this->strictMode = $strictMode;
         $this->intlExtension = $intlExtension;
     }
