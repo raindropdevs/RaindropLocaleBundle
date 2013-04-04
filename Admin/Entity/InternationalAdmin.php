@@ -28,13 +28,40 @@ class InternationalAdmin extends Admin
      */    
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $query = $this->modelManager
-                ->getEntityManager('Raindrop\LocaleBundle\Entity\Language')
-                ->createQuery('SELECT l FROM Raindrop\LocaleBundle\Entity\Language l WHERE l.id NOT IN (SELECT la.id FROM RaindropLocaleBundle:International i LEFT JOIN i.language la)');
+        $entity = $this->getSubject();
+        $id = $entity->getId();
+
+        if (is_null($id)) {
+            $language = $this->modelManager
+                    ->getEntityManager('Raindrop\LocaleBundle\Entity\Language')
+                    ->getRepository('Raindrop\LocaleBundle\Entity\Language')
+                    ->createQueryBuilder('l')
+                    ->where('l.id NOT IN (SELECT il.id FROM RaindropLocaleBundle:International i LEFT JOIN i.language il)');
+
+            $country = $this->modelManager
+                    ->getEntityManager('Raindrop\LocaleBundle\Entity\Country')
+                    ->getRepository('Raindrop\LocaleBundle\Entity\Country')
+                    ->createQueryBuilder('c')
+                    ->where('c.id NOT IN (SELECT ic.id FROM RaindropLocaleBundle:International i LEFT JOIN i.countries ic)');
+        } else {
+            $language = $this->modelManager
+                    ->getEntityManager('Raindrop\LocaleBundle\Entity\Language')
+                    ->getRepository('Raindrop\LocaleBundle\Entity\Language')
+                    ->createQueryBuilder('l')
+                    ->where('l.id NOT IN (SELECT il.id FROM RaindropLocaleBundle:International i LEFT JOIN i.language il WHERE i.id <> :id)')
+                    ->setParameter('id', $id);
+
+            $country = $this->modelManager
+                    ->getEntityManager('Raindrop\LocaleBundle\Entity\Country')
+                    ->getRepository('Raindrop\LocaleBundle\Entity\Country')
+                    ->createQueryBuilder('c')
+                    ->where('c.id NOT IN (SELECT ic.id FROM RaindropLocaleBundle:International i LEFT JOIN i.countries ic WHERE i.id <> :id)')
+                    ->setParameter('id', $id);
+        }
 
         $formMapper
-            ->add('language', 'sonata_type_model', array('required' => true, 'query' => $query))
-            ->add('countries');
+            ->add('language', null, array('required' => true, 'query_builder' => $language))
+            ->add('countries', null, array('required' => true, 'query_builder' => $country));
     }   
     
     /**
