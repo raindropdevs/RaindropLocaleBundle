@@ -2,11 +2,12 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-<parameters>
+    <parameters>
         <parameter key="raindrop_locale.request_listener.class">Raindrop\LocaleBundle\EventListener\LocaleListener</parameter>
         <parameter key="raindrop_locale.guesser_manager.class">Raindrop\LocaleBundle\LocaleGuesser\LocaleGuesserManager</parameter>
         <parameter key="raindrop_locale.information.class">Raindrop\LocaleBundle\LocaleInformaion\LocaleInformation</parameter>
     </parameters>
+
     <services>
 
         <service id="raindrop_locale.guesser_manager" class="%raindrop_locale.guesser_manager.class%">
