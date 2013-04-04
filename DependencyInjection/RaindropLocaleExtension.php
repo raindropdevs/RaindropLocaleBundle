@@ -52,6 +52,7 @@ class RaindropLocaleExtension extends Extension
         $loader->load('switcher.xml');
 
         if (class_exists('Sonata\\AdminBundle\\Admin\\Admin')) $loader->load('admin.xml');
+        if (class_exists('Raindrop\GeoipBundle\Manager\GeoipManager')) $loader->load('geoip_guesser.xml');
     }
     /**
      * {@inheritDoc}
