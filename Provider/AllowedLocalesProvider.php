@@ -43,6 +43,7 @@ class AllowedLocalesProvider
         $query = $this->em->createQuery('SELECT c FROM RaindropLocaleBundle:Country c WHERE c.enabled = true')->getResult();
         
         foreach ($query as $country) {
+            $this->result[] = $country->getDefaultLanguage()->getCode().'_'.$country->getCode();
             foreach ($country->getLanguages() as $language) {
                 $this->result[] = $language->getCode().'_'.$country->getCode();
             }
