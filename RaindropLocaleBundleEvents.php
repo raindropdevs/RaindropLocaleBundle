@@ -18,4 +18,14 @@ final class RaindropLocaleBundleEvents
      *
      */
     const onLocaleChange = 'raindrop_locale.change';
+
+    /**
+     * The raindrop_locale.geoip event is thrown each time the geoip locale is call.
+     *
+     * The event listener receives an Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent instance
+     *
+     * @var string
+     *
+     */
+    const onGeoipLocaleGuess = 'raindrop_locale.geoip';
 }

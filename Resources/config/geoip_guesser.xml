@@ -5,6 +5,7 @@
     
     <parameters>
         <parameter key="raindrop_locale.geoip_guesser.class">Raindrop\LocaleBundle\LocaleGuesser\GeoipLocaleGuesser</parameter>
+        <parameter key="raindrop_locale.geoip_listener.class">Raindrop\LocaleBundle\EventListener\GeoipListener</parameter>
     </parameters>               
                
     <services>
@@ -12,7 +13,25 @@
         <service id="raindrop_locale.geoip_guesser" class="%raindrop_locale.geoip_guesser.class%">
             <argument type="service" id="raindrop_locale.validator.meta" />
             <argument type="service" id="raindrop.geoip" />
+            
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
+
             <tag name="raindrop_locale.guesser" alias="geoip" />
+        </service>   
+        
+        <service id="raindrop_locale.geoip_listener" class="%raindrop_locale.geoip_listener.class%">
+            <argument type="service" id="logger" />
+            <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            <argument type="service" id="router"/>
+
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
+
+<!--            <tag name="kernel.event_listener" event="raindrop_locale.geoip" method="onGeoipLocaleGuess" />-->
+            <tag name="kernel.event_subscriber"/>
         </service>   
         
     </services>

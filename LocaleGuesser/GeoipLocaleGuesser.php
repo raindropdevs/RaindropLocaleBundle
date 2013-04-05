@@ -5,6 +5,9 @@ namespace Raindrop\LocaleBundle\LocaleGuesser;
 use Symfony\Component\HttpFoundation\Request;
 use Raindrop\LocaleBundle\Validator\MetaValidator;
 use Raindrop\GeoipBundle\Manager\GeoipManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent;
+use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 
 /**
  * Locale Guesser for detecing the locale from the client IP
@@ -53,13 +56,16 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
         $clientIp = $request->getClientIp();
         // Get the country code / locale
         $countryCode = $geoip->getCountryCode($clientIp);
-
+        $countryCode = 'sq_AF';
         if (empty($countryCode)) {
             return false;
         }        
+
+        $geoipEvent = new FilterLocaleSwitchEvent($request, $countryCode);
+        $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onGeoipLocaleGuess, $geoipEvent);
         
-        // If the locale is allowed, return the locale.
-        if ($validator->isAllowed($countryCode)) {
+        // If the country code is valid, return the locale.
+        if ($validator->isAValid($countryCode)) {
             $this->identifiedLocale = $countryCode;
 
             return true;
@@ -74,5 +80,15 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
     public function getIdentifiedLocale()
     {
         return $this->identifiedLocale;
+    }   
+    
+    /**
+     * DI Setter for the EventDispatcher
+     *
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
+     */
+    public function setEventDispatcher(EventDispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
     }    
 }
