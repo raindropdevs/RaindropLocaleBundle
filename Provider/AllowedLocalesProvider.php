@@ -40,7 +40,7 @@ class AllowedLocalesProvider
      */
     public function getAllowedLocalesFromDatabase()
     {
-        $query = $this->em->createQuery('SELECT c FROM RaindropLocaleBundle:Country c WHERE c.enabled = true')->getResult();
+        $query = $this->em->createQuery('SELECT c, dl, l FROM RaindropLocaleBundle:Country c LEFT JOIN c.defaultLanguage dl LEFT JOIN c.languages l  WHERE c.enabled = true')->getResult();
         
         foreach ($query as $country) {
             $this->result[] = $country->getDefaultLanguage()->getCode().'_'.$country->getCode();
