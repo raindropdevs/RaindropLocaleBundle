@@ -52,7 +52,7 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
 
         $clientIp = $request->getClientIp();
         // Get the country code / locale
-        $countryCode = strtolower($geoip->getCountryCode($clientIp));
+        $countryCode = $geoip->getCountryCode($clientIp);
 
         if (empty($countryCode)) {
             return false;
