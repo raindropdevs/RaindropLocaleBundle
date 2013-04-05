@@ -40,4 +40,18 @@ class MetaValidator
 
         return (count($errorListLocale) == 0 && count($errorListLocaleAllowed) == 0);
     }
+
+    /**
+     * Checks if a locale is valid
+     *
+     * @param string $locale
+     *
+     * @return bool
+     */
+    public function isAValid($locale)
+    {
+        $errorListLocale  = $this->validator->validateValue($locale, new Locale);
+
+        return (count($errorListLocale) == 0);
+    }
 }
