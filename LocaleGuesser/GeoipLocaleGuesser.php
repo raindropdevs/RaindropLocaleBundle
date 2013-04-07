@@ -56,7 +56,7 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
         $clientIp = $request->getClientIp();
         // Get the country code / locale
         $countryCode = $geoip->getCountryCode($clientIp);
-        $countryCode = 'sq_AF';
+
         if (empty($countryCode)) {
             return false;
         }        
