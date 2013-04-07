@@ -13,7 +13,7 @@
         <service id="raindrop_locale.geoip_guesser" class="%raindrop_locale.geoip_guesser.class%">
             <argument type="service" id="raindrop_locale.validator.meta" />
             <argument type="service" id="raindrop.geoip" />
-            
+
             <call method="setEventDispatcher">
                 <argument type="service" id="event_dispatcher"/>
             </call>
@@ -25,12 +25,10 @@
             <argument type="service" id="logger" />
             <argument type="service" id="raindrop_locale.allowed_locales.provider" />
             <argument type="service" id="router"/>
-
-            <call method="setEventDispatcher">
-                <argument type="service" id="event_dispatcher"/>
-            </call>
-
-<!--            <tag name="kernel.event_listener" event="raindrop_locale.geoip" method="onGeoipLocaleGuess" />-->
+            <argument type="service" id="raindrop_locale.locale_session" />
+            <argument type="service" id="session"/>
+            <argument>%raindrop_locale.session.variable%</argument>
+            
             <tag name="kernel.event_subscriber"/>
         </service>   
         

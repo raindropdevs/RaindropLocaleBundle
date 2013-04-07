@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Raindrop\LocaleBundle\Validator\MetaValidator;
 use Raindrop\GeoipBundle\Manager\GeoipManager;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent;
 use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 
 /**
@@ -61,9 +60,6 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
             return false;
         }        
 
-        $geoipEvent = new FilterLocaleSwitchEvent($request, $countryCode);
-        $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onGeoipLocaleGuess, $geoipEvent);
-        
         // If the country code is valid, return the locale.
         if ($validator->isAValid($countryCode)) {
             $this->identifiedLocale = $countryCode;
