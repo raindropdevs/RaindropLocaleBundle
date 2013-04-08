@@ -79,7 +79,7 @@ class GeoipListener implements EventSubscriberInterface
         if (!$this->session->has($this->sessionVariable)) {
             // Get the country code / locale
             $countryCode = $this->geoip->getCountryCode($clientIp); 
-            $countryCode = 'AR';
+
             if (empty($countryCode)) {
                 // ip not recognized
                 $locale = ' ';
