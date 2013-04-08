@@ -94,6 +94,10 @@ class GeoipListener implements EventSubscriberInterface
                         // international country
                         $locale = $this->allowedLocales->getLanguageByInternationalCountry($countryCode);
                         $route = '_demo_login';                        
+                    } else {
+                        // default international country
+                        $locale = ' ';
+                        $route = '_demo_login';
                     }
                 } else {
                     // country enabled
