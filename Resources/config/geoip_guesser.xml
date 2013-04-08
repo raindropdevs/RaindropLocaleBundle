@@ -25,10 +25,13 @@
             <argument type="service" id="logger" />
             <argument type="service" id="raindrop_locale.allowed_locales.provider" />
             <argument type="service" id="router"/>
-            <argument type="service" id="raindrop_locale.locale_session" />
             <argument type="service" id="session"/>
             <argument>%raindrop_locale.session.variable%</argument>
-            
+
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
+
             <tag name="kernel.event_subscriber"/>
         </service>   
         

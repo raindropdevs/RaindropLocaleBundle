@@ -5,6 +5,7 @@ namespace Raindrop\LocaleBundle\EventListener;
 use Raindrop\LocaleBundle\Provider\AllowedLocalesProvider;
 use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 use Raindrop\LocaleBundle\Session\LocaleSession;
+use Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
@@ -13,7 +14,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent;
 
 /**
  * GeoipListener
@@ -36,11 +36,6 @@ class GeoipListener implements EventSubscriberInterface
     protected $router;
 
     /**
-     * @var LocaleSession $localesession
-     */
-    private $localesession;
-
-    /**
      * @var Session $session
      */
     protected $session;
@@ -56,24 +51,24 @@ class GeoipListener implements EventSubscriberInterface
      * @param LoggerInterface         $logger
      * @param AllowedLocalesProvider  $allowedLocales
      * @param RouterInterface         $router
-     * @param LocaleSession           $localesession
      * @param Session                 $session
      * @param string                  $sessionVariable
      */
-    public function __construct(LoggerInterface $logger, AllowedLocalesProvider $allowedLocales, RouterInterface $router, LocaleSession $localesession, Session $session, $sessionVariable = 'raindrop_locale')
+    public function __construct(LoggerInterface $logger, AllowedLocalesProvider $allowedLocales, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale')
     {
         $this->logger = $logger;
 		$this->allowedLocales = $allowedLocales;
         $this->router = $router;
         $this->session = $session;
         $this->sessionVariable = $sessionVariable;
-        $this->localesession = $localesession;
     }    
     
     public function onGeoipLocaleGuess(GetResponseEvent $event)
     {
         if (!$this->session->has($this->sessionVariable)) {
-            $this->localesession->setLocale('sq_AF');
+            $localeSwitchEvent = new FilterLocaleSwitchEvent($event->getRequest(), 'sq_AF');
+            $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onLocaleChange, $localeSwitchEvent);            
+            
             $response = new RedirectResponse($this->router->generate('_demo'), '301');
             $event->setResponse($response);
         }
@@ -88,5 +83,15 @@ class GeoipListener implements EventSubscriberInterface
             // must be registered after the Router to have access to the _locale and before the Symfony LocaleListener
             KernelEvents::REQUEST => array(array('onGeoipLocaleGuess', 24))
         );
-    }   
+    } 
+    
+    /**
+     * DI Setter for the EventDispatcher
+     *
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
+     */
+    public function setEventDispatcher(EventDispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }     
 }
