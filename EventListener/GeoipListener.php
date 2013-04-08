@@ -14,6 +14,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Raindrop\GeoipBundle\Manager\GeoipManager;
 
 /**
  * GeoipListener
@@ -44,6 +45,11 @@ class GeoipListener implements EventSubscriberInterface
      * @var string $sessionVariable
      */
     protected $sessionVariable;
+    
+    /**
+     * @var GeoipManager
+     */
+    private $geoip;    
 
     /**
      * Constructor.
@@ -53,23 +59,52 @@ class GeoipListener implements EventSubscriberInterface
      * @param RouterInterface         $router
      * @param Session                 $session
      * @param string                  $sessionVariable
+     * @param GeoipManager            $geoip
      */
-    public function __construct(LoggerInterface $logger, AllowedLocalesProvider $allowedLocales, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale')
+    public function __construct(LoggerInterface $logger, AllowedLocalesProvider $allowedLocales, RouterInterface $router,  GeoipManager $geoip, Session $session, $sessionVariable = 'raindrop_locale')
     {
         $this->logger = $logger;
 		$this->allowedLocales = $allowedLocales;
         $this->router = $router;
+        $this->geoip = $geoip;
         $this->session = $session;
         $this->sessionVariable = $sessionVariable;
     }    
     
     public function onGeoipLocaleGuess(GetResponseEvent $event)
     {
+        $request = $event->getRequest();
+        $clientIp = $request->getClientIp();
+        
         if (!$this->session->has($this->sessionVariable)) {
-            $localeSwitchEvent = new FilterLocaleSwitchEvent($event->getRequest(), 'sq_AF');
+            // Get the country code / locale
+            $countryCode = $this->geoip->getCountryCode($clientIp); 
+            $countryCode = 'AR';
+            if (empty($countryCode)) {
+                // ip not recognized
+                $locale = ' ';
+                $route = '_demo';
+            } else {
+                $countries = $this->allowedLocales->getAllowedCountriesFromDatabase();
+                
+                if (!in_array($countryCode, $countries)) {
+                    $international = $this->allowedLocales->getAllowedInternationalCountriesFromDatabase();
+ 
+                    if (in_array($countryCode, $international)) {
+                        $locale = $this->allowedLocales->getLanguageByInternationalCountry($countryCode);
+                        $route = '_demo_login';                        
+                    }
+                } else {
+                    // country enabled
+                    $locale = $this->allowedLocales->getDefaultLanguageByCountry($countryCode);
+                    $route = '_demo_contact';
+                }
+            }
+            
+            $localeSwitchEvent = new FilterLocaleSwitchEvent($request, $locale.'_JJ');
             $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onLocaleChange, $localeSwitchEvent);            
             
-            $response = new RedirectResponse($this->router->generate('_demo'), '301');
+            $response = new RedirectResponse($this->router->generate($route), '301');
             $event->setResponse($response);
         }
     }
