@@ -106,7 +106,7 @@ class GeoipListener implements EventSubscriberInterface
             $localeSwitchEvent = new FilterLocaleSwitchEvent($request, $locale.'_JJ');
             $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onLocaleChange, $localeSwitchEvent);            
             
-            $response = new RedirectResponse($this->router->generate($route), '301');
+            $response = new RedirectResponse($this->router->generate($route));
             $event->setResponse($response);
         }
     }
