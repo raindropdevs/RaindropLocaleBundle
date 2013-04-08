@@ -91,6 +91,7 @@ class GeoipListener implements EventSubscriberInterface
                     $international = $this->allowedLocales->getAllowedInternationalCountriesFromDatabase();
  
                     if (in_array($countryCode, $international)) {
+                        // international country
                         $locale = $this->allowedLocales->getLanguageByInternationalCountry($countryCode);
                         $route = '_demo_login';                        
                     }
@@ -101,6 +102,7 @@ class GeoipListener implements EventSubscriberInterface
                 }
             }
             
+            // dispatch FilterLocaleSwitchEvent
             $localeSwitchEvent = new FilterLocaleSwitchEvent($request, $locale.'_JJ');
             $this->dispatcher->dispatch(RaindropLocaleBundleEvents::onLocaleChange, $localeSwitchEvent);            
             
