@@ -8,30 +8,30 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 /**
  * AllowedLocales Provider
  */
-class AllowedLocalesProvider 
+class AllowedLocalesProvider
 {
     /**
-     * @var LoggerInterface $logger 
+     * @var LoggerInterface $logger
      */
     protected $logger;
 
-	/**
-     * @var EntityManager $entityManager 
+    /**
+     * @var EntityManager $entityManager
      */
     protected $entityManager;
 
     /**
      * Constructor.
-     * 
-     * @param LoggerInterface $logger 
-     * @param EntityManager $entityManager
+     *
+     * @param LoggerInterface $logger
+     * @param EntityManager   $entityManager
      */
     public function __construct(LoggerInterface $logger, EntityManager $entityManager)
     {
         $this->logger = $logger;
-		$this->em = $entityManager;
+        $this->em = $entityManager;
     }
-    
+
     /**
      * Returns the configuration of allowed locales
      *
@@ -39,18 +39,12 @@ class AllowedLocalesProvider
      */
     public function getAllowedLocalesFromDatabase()
     {
-        $query = $this->em->createQuery('SELECT c, dl, l FROM RaindropLocaleBundle:Country c LEFT JOIN c.defaultLanguage dl LEFT JOIN c.languages l WHERE c.enabled = true')->getResult();
-        
-        foreach ($query as $country) {
-            $result[] = $country->getDefaultLanguage()->getCode().'_'.$country->getCode();
-            foreach ($country->getLanguages() as $language) {
-                $result[] = $language->getCode().'_'.$country->getCode();
-            }
-        }
+        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findAllowedLocales();
 
         return $result;
-    }  
-    
+    }
+
     /**
      * Returns the allowed countries
      *
@@ -58,15 +52,25 @@ class AllowedLocalesProvider
      */
     public function getAllowedCountriesFromDatabase()
     {
-        $query = $this->em->createQuery('SELECT c FROM RaindropLocaleBundle:Country c WHERE c.enabled = true')->getResult();
-        
-        foreach ($query as $country) {
-            $result[] = $country->getCode();
-        }
+        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findAllowedCountries();
 
         return $result;
-    }   
-    
+    }
+
+    /**
+     * Returns the default language of a country
+     *
+     * @param string $countryCode
+     */
+    public function getDefaultLanguageByCountry($countryCode)
+    {
+        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findDefaultLanguageByCountryCode($countryCode);
+
+        return $result;
+    }
+
     /**
      * Returns the allowed international countries
      *
@@ -74,41 +78,21 @@ class AllowedLocalesProvider
      */
     public function getAllowedInternationalCountriesFromDatabase()
     {
-        $query = $this->em->createQuery('SELECT i, c, l FROM RaindropLocaleBundle:International i LEFT JOIN i.countries c LEFT JOIN i.language l')->getResult();
-
-        foreach ($query as $international) {
-            foreach ($international->getCountries() as $country) {
-                $result[] = $country->getCode();
-            }
-        }
-
-        return $result;
-    }      
-
-    /**
-     * Returns the default language of a country
-     * 
-     * @param string $country 
-     */
-    public function getDefaultLanguageByCountry($country) 
-    {
-        $query = $this->em->createQuery('SELECT c, dl FROM RaindropLocaleBundle:Country c LEFT JOIN c.defaultLanguage dl WHERE c.code = :code')->setParameter('code', $country)->getSingleResult();
-        
-        $result = $query->getDefaultLanguage()->getCode();
+        $result = $this->em->getRepository('RaindropLocaleBundle:International')
+                ->findAllowedInternationalCountries();
 
         return $result;
     }
 
     /**
      * Returns the language of a international country
-     * 
-     * @param string $country 
+     *
+     * @param string $countrycode
      */
-    public function getLanguageByInternationalCountry($country) 
+    public function getLanguageByInternationalCountry($countrycode)
     {
-        $query = $this->em->createQuery('SELECT i, c, l FROM RaindropLocaleBundle:International i LEFT JOIN i.countries c LEFT JOIN i.language l WHERE c.code = :code')->setParameter('code', $country)->getSingleResult();
-        
-        $result = $query->getLanguage()->getCode();
+        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findLanguageByInternationalCountry($countryCode);
 
         return $result;
     }
