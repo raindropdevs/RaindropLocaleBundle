@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Raindrop\LocaleBundle\DependencyInjection\Compiler\GuesserCompilerPass;
 use Raindrop\LocaleBundle\DependencyInjection\Compiler\RouterResourcePass;
+use Raindrop\LocaleBundle\DependencyInjection\Compiler\AllowedLocalesPass;
 
 class RaindropLocaleBundle extends Bundle
 {
@@ -20,5 +21,6 @@ class RaindropLocaleBundle extends Bundle
 
         $container->addCompilerPass(new GuesserCompilerPass);
         $container->addCompilerPass(new RouterResourcePass);
+        $container->addCompilerPass(new AllowedLocalesPass);
     }
 }

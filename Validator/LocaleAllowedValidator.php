@@ -31,13 +31,16 @@ class LocaleAllowedValidator extends ConstraintValidator
     /**
      * Constructor
      *
-     * @param array $allowedLocales List of allowed locales
-     * @param bool  $strictMode     Match locales strict (e.g. de_DE will not match allowedLocale de)
-     * @param bool  $intlExtension  Wether the intl extension is installed
+     * @param AllowedLocalesProvider $allowedLocalesProvider Allowed locales provider
+     * @param bool                   $strictMode             Match locales strict (e.g. de_DE will not match allowedLocale de)
+     * @param bool                   $intlExtension          Wether the intl extension is installed
      */
-    public function __construct(AllowedLocalesProvider $allowedLocales, $strictMode = false, $intlExtension = false)
+    public function __construct(AllowedLocalesProvider $allowedLocalesProvider, $strictMode = false, $intlExtension = false)
     {
-        $this->allowedLocales = $allowedLocales->getAllowedLocalesFromDatabase();
+        // get allowed locales from provider
+        $allowedLocales = $allowedLocalesProvider->getAllowedLocales();
+
+        $this->allowedLocales = $allowedLocales;
         $this->strictMode = $strictMode;
         $this->intlExtension = $intlExtension;
     }
