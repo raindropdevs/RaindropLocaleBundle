@@ -18,8 +18,8 @@ class InternationalRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('i')
                 ->select('i', 'c', 'l')
-                ->leftJoin('c.countries', 'c')
-                ->leftJoin('c.language', 'l')
+                ->leftJoin('i.countries', 'c')
+                ->leftJoin('i.language', 'l')
                 ->getQuery()
                 ->getResult();
 
@@ -44,8 +44,8 @@ class InternationalRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('i')
                 ->select('i', 'c', 'l')
-                ->leftJoin('c.countries', 'c')
-                ->leftJoin('c.language', 'l')
+                ->leftJoin('i.countries', 'c')
+                ->leftJoin('i.language', 'l')
                 ->where('c.code = :code')
                 ->setParameter('code', $countrycode)
                 ->getQuery()
