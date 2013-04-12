@@ -118,6 +118,13 @@ class Configuration implements ConfigurationInterface
                             ->thenInvalid(sprintf("Invalid HTTP statuscode. Available statuscodes for redirection are:\n\n%s \n\nSee reference for HTTP status codes", implode(", ",$validStatuscodes)))
                     ->end()
                 ->end()
+                ->arrayNode('geoip')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('redirect_to_choose_country_route')->defaultNull()->end()
+                        ->scalarNode('international_country_code')->defaultNull()->end()
+                     ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -71,7 +71,7 @@ class AllowedLocalesProvider
      *
      * @return array
      */
-    public function getAllowedCountriesFromDatabase()
+    public function getAllowedCountries()
     {
         $result = $this->em->getRepository('RaindropLocaleBundle:Country')
                 ->findAllowedCountries();
@@ -97,7 +97,7 @@ class AllowedLocalesProvider
      *
      * @return array
      */
-    public function getAllowedInternationalCountriesFromDatabase()
+    public function getAllowedInternationalCountries()
     {
         $result = $this->em->getRepository('RaindropLocaleBundle:International')
                 ->findAllowedInternationalCountries();
