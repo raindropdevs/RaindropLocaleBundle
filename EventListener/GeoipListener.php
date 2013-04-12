@@ -5,6 +5,7 @@ namespace Raindrop\LocaleBundle\EventListener;
 use Raindrop\LocaleBundle\Provider\AllowedLocalesProvider;
 use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 use Raindrop\LocaleBundle\Event\FilterLocaleSwitchEvent;
+use Raindrop\GeoipBundle\Manager\GeoipManager;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
@@ -13,7 +14,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Raindrop\GeoipBundle\Manager\GeoipManager;
 
 /**
  * GeoipListener
