@@ -23,7 +23,8 @@
     "require-dev": {
         "twig/twig": "1.*",
         "ext-intl": "*",
-        "symfony/form": ">=2.1,<2.4-dev"
+        "symfony/form": ">=2.1,<2.4-dev",
+        "raindrop/geoip-bundle": "dev-master"
     },
     "suggest": {
         "ext-intl": "Needed for displaying the countryname in the locale language",
