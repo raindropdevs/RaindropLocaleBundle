@@ -23,16 +23,25 @@
         
         <service id="raindrop_locale.geoip_listener" class="%raindrop_locale.geoip_listener.class%">
             <argument type="service" id="logger" />
-            <argument type="service" id="raindrop_locale.allowed_locales.provider" />
             <argument type="service" id="router"/>
-            <argument type="service" id="raindrop.geoip" />
             <argument type="service" id="session"/>
             <argument>%raindrop_locale.session.variable%</argument>
-            <argument>%raindrop_locale.geoip.redirect_to_choose_country_route%</argument>
-            <argument>%raindrop_locale.geoip.international_country_code%</argument>
 
             <call method="setEventDispatcher">
                 <argument type="service" id="event_dispatcher"/>
+            </call>
+
+            <call method="setGeoipManager">
+                <argument type="service" id="raindrop.geoip" />
+            </call>
+
+            <call method="setAllowedLocalesProvider">
+                <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            </call>
+
+            <call method="setGeoipParameters">
+                <argument>%raindrop_locale.geoip.redirect_to_choose_country_route%</argument>
+                <argument>%raindrop_locale.geoip.international_country_code%</argument>
             </call>
 
             <tag name="kernel.event_subscriber"/>

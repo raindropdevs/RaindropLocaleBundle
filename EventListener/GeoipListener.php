@@ -26,9 +26,9 @@ class GeoipListener implements EventSubscriberInterface
     protected $logger;
 
     /**
-     * @var AllowedLocalesProvider $allowedLocales
+     * @var AllowedLocalesProvider $allowedLocalesProvider
      */
-    protected $allowedLocales;
+    protected $allowedLocalesProvider;
 
     /**
      * @var RouterInterface $router
@@ -51,25 +51,29 @@ class GeoipListener implements EventSubscriberInterface
     private $geoip;
 
     /**
+     * @var string
+     */
+    private $chooseCountryRoute;
+
+    /**
+     * @var string
+     */
+    private $internationalCountryCode;
+
+    /**
      * Constructor.
      *
-     * @param LoggerInterface        $logger
-     * @param AllowedLocalesProvider $allowedLocales
-     * @param RouterInterface        $router
-     * @param Session                $session
-     * @param string                 $sessionVariable
-     * @param GeoipManager           $geoip
+     * @param LoggerInterface $logger
+     * @param RouterInterface $router
+     * @param Session         $session
+     * @param string          $sessionVariable
      */
-    public function __construct(LoggerInterface $logger, AllowedLocalesProvider $allowedLocales, RouterInterface $router,  GeoipManager $geoip, Session $session, $sessionVariable = 'raindrop_locale', $chooseCountryRoute, $internationalCountryCode)
+    public function __construct(LoggerInterface $logger, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale')
     {
         $this->logger = $logger;
-        $this->allowedLocales = $allowedLocales;
         $this->router = $router;
-        $this->geoip = $geoip;
         $this->session = $session;
         $this->sessionVariable = $sessionVariable;
-        $this->chooseCountryRoute = $chooseCountryRoute;
-        $this->internationalCountryCode = $internationalCountryCode;
     }
 
     /**
@@ -92,14 +96,14 @@ class GeoipListener implements EventSubscriberInterface
                 $locale = ' ';
                 $route = $this->router->generate($this->chooseCountryRoute);
             } else {
-                $countries = $this->allowedLocales->getAllowedCountries();
+                $countries = $this->allowedLocalesProvider->getAllowedCountries();
 
                 if (!in_array($countryCode, $countries)) {
-                    $international = $this->allowedLocales->getAllowedInternationalCountries();
+                    $international = $this->allowedLocalesProvider->getAllowedInternationalCountries();
 
                     if (in_array($countryCode, $international)) {
                         // international country
-                        $locale = $this->allowedLocales->getLanguageByInternationalCountry($countryCode);
+                        $locale = $this->allowedLocalesProvider->getLanguageByInternationalCountry($countryCode);
                     } else {
                         // default international country
                         $locale = 'en';
@@ -109,7 +113,7 @@ class GeoipListener implements EventSubscriberInterface
                     $locale .= '_' . $this->internationalCountryCode;
                 } else {
                     // country enabled
-                    $locale = $this->allowedLocales->getDefaultLanguageByCountry($countryCode);
+                    $locale = $this->allowedLocalesProvider->getDefaultLanguageByCountry($countryCode);
                 }
                 // home page whit locale
                 $route = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBaseUrl() . '/' . $locale;
@@ -144,5 +148,37 @@ class GeoipListener implements EventSubscriberInterface
     public function setEventDispatcher(EventDispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
+    }
+
+    /**
+     * DI Setter for the GeoipManager
+     *
+     * @param \Raindrop\GeoipBundle\Manager\GeoipManager $geoip
+     */
+    public function setGeoipManager(GeoipManager $geoip)
+    {
+        $this->geoip = $geoip;
+    }
+
+    /**
+     * DI Setter for the AllowedLocalesProvider
+     *
+     * @param \Raindrop\LocaleBundle\Provider\AllowedLocalesProvider $allowedLocalesProvider
+     */
+    public function setAllowedLocalesProvider(AllowedLocalesProvider $allowedLocalesProvider)
+    {
+        $this->allowedLocalesProvider = $allowedLocalesProvider;
+    }
+
+    /**
+     * DI Setter for the choose_country_route and international_country_code
+     *
+     * @param string $chooseCountryRoute
+     * @param string $internationalCountryCode
+     */
+    public function setGeoipParameters($chooseCountryRoute, $internationalCountryCode)
+    {
+        $this->chooseCountryRoute = $chooseCountryRoute;
+        $this->internationalCountryCode = $internationalCountryCode;
     }
 }
