@@ -35,6 +35,17 @@ class MetaValidator
      */
     public function isAllowed($locale)
     {
+        $international = strpos($locale, $this->internationalCountryCode);
+
+        if ($international !== false) {
+            // find the correct locale from international locale
+            $locale = substr($locale, 0, strpos($locale, '_'));
+
+            $errorListLocale  = $this->validator->validateValue($locale, new Locale);
+
+            return count($errorListLocale) == 0;
+        }
+
         $errorListLocale  = $this->validator->validateValue($locale, new Locale);
         $errorListLocaleAllowed = $this->validator->validateValue($locale, new LocaleAllowed);
 
@@ -53,5 +64,15 @@ class MetaValidator
         $errorListLocale  = $this->validator->validateValue($locale, new Locale);
 
         return (count($errorListLocale) == 0);
+    }
+
+    /**
+     * DI Setter for the international_country_code
+     *
+     * @param string $chooseCountryRoute
+     */
+    public function setGeoipParameters($internationalCountryCode)
+    {
+        $this->internationalCountryCode = $internationalCountryCode;
     }
 }

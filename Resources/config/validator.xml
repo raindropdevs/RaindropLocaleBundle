@@ -21,6 +21,10 @@
 
         <service id="raindrop_locale.validator.meta" class="Raindrop\LocaleBundle\Validator\MetaValidator">
             <argument type="service" id="validator"/>
+
+            <call method="setGeoipParameters">
+                <argument>%raindrop_locale.geoip.international_country_code%</argument>
+            </call>
         </service>
 
     </services>
