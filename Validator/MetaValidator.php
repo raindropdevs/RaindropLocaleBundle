@@ -59,7 +59,7 @@ class MetaValidator
      *
      * @return bool
      */
-    public function isAValid($locale)
+    public function isValid($locale)
     {
         $errorListLocale  = $this->validator->validateValue($locale, new Locale);
 

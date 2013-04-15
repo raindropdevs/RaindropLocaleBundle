@@ -61,7 +61,7 @@ class GeoipLocaleGuesser implements LocaleGuesserInterface
         }        
 
         // If the country code is valid, return the locale.
-        if ($validator->isAValid($countryCode)) {
+        if ($validator->isValid($countryCode)) {
             $this->identifiedLocale = $countryCode;
 
             return true;

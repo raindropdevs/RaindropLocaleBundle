@@ -45,7 +45,7 @@ class GeoipLocaleGuesserTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue('8.8.8.8'));
         
         $metaValidator->expects($this->once())
-                ->method('isAllowed')
+                ->method('isValid')
                 ->will($this->returnValue(true));        
         
         $geoip->expects($this->once())
@@ -67,7 +67,7 @@ class GeoipLocaleGuesserTest extends \PHPUnit_Framework_TestCase
                 ->will($this->returnValue('8.8.8.8'));
         
         $metaValidator->expects($this->once())
-                ->method('isAllowed')
+                ->method('isValid')
                 ->will($this->returnValue(false));        
         
         $geoip->expects($this->once())
