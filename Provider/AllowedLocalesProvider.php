@@ -124,4 +124,22 @@ class AllowedLocalesProvider
 
         return $result;
     }
+
+    /**
+     * Returns the list of a countries
+     *
+     * @return array
+     */
+    public function getCountryList()
+    {
+        $country = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findCountryList();
+
+        $international = $this->em->getRepository('RaindropLocaleBundle:International')
+                ->findCountryList();
+
+        $result = array_merge($country, $international);
+
+        return $result;
+    }
 }

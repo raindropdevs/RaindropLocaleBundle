@@ -77,4 +77,26 @@ class InternationalRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * Find international countries
+     *
+     * @return array
+     */
+    public function findCountryList()
+    {
+        $query = $this->createQueryBuilder('i')
+                ->select('i', 'l')
+                ->leftJoin('i.language', 'l')
+                ->getQuery()
+                ->getResult();
+
+        $result = array();
+
+        foreach ($query as $country) {
+            $result[] = 'JJ' . strtoupper($country->getLanguage()->getCode());
+        }
+
+        return $result;
+    }
 }

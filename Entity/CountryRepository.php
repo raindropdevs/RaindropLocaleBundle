@@ -78,4 +78,26 @@ class CountryRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * Find allowed countries
+     *
+     * @return array
+     */
+    public function findCountryList()
+    {
+        $query = $this->createQueryBuilder('c')
+                ->select('c')
+                ->where('c.enabled = true')
+                ->getQuery()
+                ->getResult();
+
+        $result = array();
+
+        foreach ($query as $country) {
+            $result[] = $country->getCode();
+        }
+
+        return $result;
+    }
 }
