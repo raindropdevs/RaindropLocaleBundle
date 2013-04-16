@@ -94,7 +94,7 @@ class InternationalRepository extends EntityRepository
         $result = array();
 
         foreach ($query as $country) {
-            $result[] = 'JJ' . strtoupper($country->getLanguage()->getCode());
+            $result['JJ' . strtoupper($country->getLanguage()->getCode())] = $country->getLanguage()->getCode();
         }
 
         return $result;

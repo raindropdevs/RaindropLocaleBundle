@@ -95,7 +95,13 @@ class CountryRepository extends EntityRepository
         $result = array();
 
         foreach ($query as $country) {
-            $result[] = $country->getCode();
+            $lang = array();
+            $lang[] = $country->getDefaultLanguage()->getCode();
+            foreach ($country->getLanguages() as $language) {
+                $lang[] = $language->getCode();
+            }
+
+            $result[$country->getCode()] = $lang;
         }
 
         return $result;
