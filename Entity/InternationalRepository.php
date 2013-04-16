@@ -55,4 +55,26 @@ class InternationalRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * Find allowed locales (language_COUNTRY)
+     *
+     * @return array
+     */
+    public function findAllowedLocales()
+    {
+        $query = $this->createQueryBuilder('i')
+                ->select('i', 'l')
+                ->leftJoin('i.language', 'l')
+                ->getQuery()
+                ->getResult();
+
+        $result = array();
+
+        foreach ($query as $country) {
+            $result[] = $country->getLanguage()->getCode() . '_JJ' . strtoupper($country->getLanguage()->getCode());
+        }
+
+        return $result;
+    }
 }

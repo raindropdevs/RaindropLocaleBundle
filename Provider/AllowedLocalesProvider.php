@@ -60,8 +60,15 @@ class AllowedLocalesProvider
      */
     public function getAllowedLocalesFromDatabase()
     {
-        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+        // find countries locale
+        $country = $this->em->getRepository('RaindropLocaleBundle:Country')
                 ->findAllowedLocales();
+
+        // find international countries locale
+        $international = $this->em->getRepository('RaindropLocaleBundle:International')
+                ->findAllowedLocales();
+
+        $result = array_merge($country, $international);
 
         return $result;
     }
