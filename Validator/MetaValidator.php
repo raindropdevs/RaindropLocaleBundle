@@ -17,6 +17,11 @@ class MetaValidator
     private $validator;
 
     /**
+     * @var string
+     */
+    private $internationalCountryCode;
+
+    /**
      * Constructor
      *
      * @param Validator $validator
