@@ -46,11 +46,13 @@ class AllowedLocalesProvider
      */
     public function getAllowedLocales()
     {
-        if (!empty ($this->allowedLocales)) {
-            return $this->allowedLocales;
+        $allowedLocalesFromDatabase = $this->getAllowedLocalesFromDatabase();
+
+        if (!empty ($allowedLocalesFromDatabase)) {
+            return $allowedLocalesFromDatabase;
         }
 
-        return $this->getAllowedLocalesFromDatabase();
+        return $this->allowedLocales;
     }
 
     /**

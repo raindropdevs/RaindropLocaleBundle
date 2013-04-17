@@ -18,7 +18,11 @@
 
         <service id="raindrop_locale.information" class="%raindrop_locale.information.class%">
             <argument type="service" id="raindrop_locale.validator.meta" />
-            <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            <argument>%raindrop_locale.allowed_locales%</argument>
+
+            <call method="setAllowedLocalesProvider">
+                <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            </call>
         </service>
 
         <service id="raindrop_locale.locale_cookie" class="%raindrop_locale.cookie.class%">

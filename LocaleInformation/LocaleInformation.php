@@ -15,14 +15,11 @@ class LocaleInformation
     private $allowedLocales;
 
     /**
-     * @param MetaValidator $metaValidator          Validator
-     * @param array         $allowedLocalesProvider Allowed locales provider
+     * @param MetaValidator $metaValidator  Validator
+     * @param array         $allowedLocales Allowed locales from config
      */
-    public function __construct(MetaValidator $metaValidator, AllowedLocalesProvider $allowedLocalesProvider)
+    public function __construct(MetaValidator $metaValidator, array $allowedLocales = array())
     {
-        // get allowed locales from provider
-        $allowedLocales = $allowedLocalesProvider->getAllowedLocales();
-
         $this->allowedLocales = $allowedLocales;
         $this->metaValidator = $metaValidator;
     }
@@ -76,5 +73,16 @@ class LocaleInformation
         }
 
         return false;
+    }
+
+    /**
+     * DI Setter for the AllowedLocalesProvider
+     *
+     * @param \Raindrop\LocaleBundle\Provider\AllowedLocalesProvider $allowedLocalesProvider
+     */
+    public function setAllowedLocalesProvider(AllowedLocalesProvider $allowedLocalesProvider)
+    {
+        $allowedLocales = $allowedLocalesProvider->getAllowedLocales();
+        if (!empty ($allowedLocales)) $this->allowedLocales = $allowedLocales;
     }
 }

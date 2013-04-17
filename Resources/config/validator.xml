@@ -13,10 +13,14 @@
         </service>
 
         <service id="validator.raindrop_locale.locale_allowed" class="Raindrop\LocaleBundle\Validator\LocaleAllowedValidator">
-            <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            <argument>%raindrop_locale.allowed_locales%</argument>
             <argument>%raindrop_locale.strict_mode%</argument>
             <argument>%raindrop_locale.intl_extension_installed%</argument>
             <tag name="validator.constraint_validator" alias="raindrop_locale.validator.locale_allowed"/>
+
+            <call method="setAllowedLocalesProvider">
+                <argument type="service" id="raindrop_locale.allowed_locales.provider" />
+            </call>
         </service>
 
         <service id="raindrop_locale.validator.meta" class="Raindrop\LocaleBundle\Validator\MetaValidator">

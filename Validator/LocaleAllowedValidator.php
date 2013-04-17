@@ -31,15 +31,12 @@ class LocaleAllowedValidator extends ConstraintValidator
     /**
      * Constructor
      *
-     * @param AllowedLocalesProvider $allowedLocalesProvider Allowed locales provider
-     * @param bool                   $strictMode             Match locales strict (e.g. de_DE will not match allowedLocale de)
-     * @param bool                   $intlExtension          Wether the intl extension is installed
+     * @param array $allowedLocales Allowed locales from config
+     * @param bool  $strictMode     Match locales strict (e.g. de_DE will not match allowedLocale de)
+     * @param bool  $intlExtension  Wether the intl extension is installed
      */
-    public function __construct(AllowedLocalesProvider $allowedLocalesProvider, $strictMode = false, $intlExtension = false)
+    public function __construct(array $allowedLocales = array(), $strictMode = false, $intlExtension = false)
     {
-        // get allowed locales from provider
-        $allowedLocales = $allowedLocalesProvider->getAllowedLocales();
-
         $this->allowedLocales = $allowedLocales;
         $this->strictMode = $strictMode;
         $this->intlExtension = $intlExtension;
@@ -81,5 +78,16 @@ class LocaleAllowedValidator extends ConstraintValidator
                 $this->context->addViolation($constraint->message, array('%string%' => $locale));
             }
         }
+    }
+
+    /**
+     * DI Setter for the AllowedLocalesProvider
+     *
+     * @param \Raindrop\LocaleBundle\Provider\AllowedLocalesProvider $allowedLocalesProvider
+     */
+    public function setAllowedLocalesProvider(AllowedLocalesProvider $allowedLocalesProvider)
+    {
+        $allowedLocales = $allowedLocalesProvider->getAllowedLocales();
+        if (!empty ($allowedLocales)) $this->allowedLocales = $allowedLocales;
     }
 }
