@@ -48,6 +48,7 @@ class RaindropLocaleExtension extends Extension
 
         $loader->load('validator.xml');
         $loader->load('guessers.xml');
+        $loader->load('repositories.xml');
         $loader->load('services.xml');
         $loader->load('switcher.xml');
 
