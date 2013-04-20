@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="raindrop_locale.country.repository.class">Raindrop\LocaleBundle\Entity\CountryRepository</parameter>
+        <parameter key="raindrop_locale.language.repository.class">Raindrop\LocaleBundle\Entity\LanguageRepository</parameter>
+        <parameter key="raindrop_locale.international.repository.class">Raindrop\LocaleBundle\Entity\InternationalRepository</parameter>
+    </parameters>
+
+    <services>
+
+        <service
+            id="raindrop_locale.country.repository"
+            class="%raindrop_locale.country.repository.class%"
+            factory-service="doctrine"
+            factory-method="getRepository">
+            <argument>RaindropLocaleBundle:Country</argument>
+        </service> 
+
+        <service
+            id="raindrop_locale.language.repository"
+            class="%raindrop_locale.language.repository.class%"
+            factory-service="doctrine"
+            factory-method="getRepository">
+            <argument>RaindropLocaleBundle:Language</argument>
+        </service> 
+
+        <service
+            id="raindrop_locale.international.repository"
+            class="%raindrop_locale.international.repository.class%"
+            factory-service="doctrine"
+            factory-method="getRepository">
+            <argument>RaindropLocaleBundle:International</argument>
+        </service> 
+
+    </services>
+</container>
