@@ -81,4 +81,27 @@ class International
     {
         return sprintf("International - %s", $this->getLanguage());
     }    
+
+    /**
+     * Add countries
+     *
+     * @param \Raindrop\LocaleBundle\Entity\Country $countries
+     * @return International
+     */
+    public function addCountrie(\Raindrop\LocaleBundle\Entity\Country $countries)
+    {
+        $this->countries[] = $countries;
+    
+        return $this;
+    }
+
+    /**
+     * Remove countries
+     *
+     * @param \Raindrop\LocaleBundle\Entity\Country $countries
+     */
+    public function removeCountrie(\Raindrop\LocaleBundle\Entity\Country $countries)
+    {
+        $this->countries->removeElement($countries);
+    }
 }

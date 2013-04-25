@@ -164,4 +164,14 @@ class Country
     {
         return sprintf("%s", $this->getName());
     }
+
+    /**
+     * Remove languages
+     *
+     * @param \Raindrop\LocaleBundle\Entity\Language $languages
+     */
+    public function removeLanguage(\Raindrop\LocaleBundle\Entity\Language $languages)
+    {
+        $this->languages->removeElement($languages);
+    }
 }
