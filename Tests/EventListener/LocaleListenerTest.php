@@ -17,7 +17,6 @@ use Raindrop\LocaleBundle\LocaleGuesser\QueryLocaleGuesser;
 use Raindrop\LocaleBundle\Validator\MetaValidator;
 use Raindrop\LocaleBundle\RaindropLocaleBundleEvents;
 
-
 class LocaleListenerTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultLocaleWithoutParams()
@@ -118,7 +117,6 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
         $listener = $this->getListener('fr', $this->getGuesserManager());
         $listener->setEventDispatcher($dispatcherMock);
 
-
         $event = $this->getEvent($this->getRequestWithRouterParam());
         $listener->onKernelRequest($event);
     }
@@ -172,7 +170,7 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
     {
         $listener = new LocaleListener($locale, $manager);
         $listener->setEventDispatcher(new \Symfony\Component\EventDispatcher\EventDispatcher());
-        
+
         return $listener;
     }
 

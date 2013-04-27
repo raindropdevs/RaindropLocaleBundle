@@ -30,8 +30,8 @@ class QueryLocaleGuesser implements LocaleGuesserInterface
     /**
      * Constructor
      *
-     * @param MetaValidator $metaValidator       MetaValidator
-     * @param string        $queryParameterName  Query parameter used
+     * @param MetaValidator $metaValidator      MetaValidator
+     * @param string        $queryParameterName Query parameter used
      */
     public function __construct(MetaValidator $metaValidator, $queryParameterName = '_locale')
     {

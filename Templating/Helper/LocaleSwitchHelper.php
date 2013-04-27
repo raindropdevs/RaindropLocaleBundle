@@ -39,6 +39,7 @@ class LocaleSwitchHelper extends Helper
     public function renderSwitch(array $viewParams = array(), $template = null)
     {
         $template = $template ?: $this->view;
+
         return $this->templating->render($template, $viewParams);
     }
 

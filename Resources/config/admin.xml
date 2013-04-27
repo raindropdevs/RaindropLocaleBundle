@@ -24,7 +24,7 @@
           <tag name="sonata.admin" manager_type="orm" group="Country" label="Country"/>
 
       </service>
-       
+
        <service id="raindrop_locale.language.admin" class="%raindrop_locale.language.admin.class%">
 
           <argument />

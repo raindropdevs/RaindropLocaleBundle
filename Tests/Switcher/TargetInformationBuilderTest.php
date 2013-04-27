@@ -53,7 +53,6 @@ class TargetInformationBuilderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     /**
      * @dataProvider locales
      */
@@ -158,7 +157,6 @@ class TargetInformationBuilderTest extends \PHPUnit_Framework_TestCase
             $targetInformationBuilder->getTargetInformations(null, array('foo' => 'bar'));
         }
     }
-
 
     /**
      * @dataProvider locales

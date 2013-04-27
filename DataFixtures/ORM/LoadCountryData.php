@@ -15,7 +15,7 @@ class LoadCountryData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * @{inheritDoc}
-     */    
+     */
     public function load(ObjectManager $manager)
     {
         $countries = Yaml::parse(__DIR__ . "/../../Resources/data/country.yml");
@@ -27,15 +27,15 @@ class LoadCountryData extends AbstractFixture implements OrderedFixtureInterface
             $country->setName($name);
             $manager->persist($country);
         }
-        
+
         $manager->flush();
     }
 
     /**
      * @{inheritDoc}
-     */        
+     */
     public function getOrder()
     {
         return 1;
-    }    
+    }
 }

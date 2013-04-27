@@ -7,7 +7,7 @@ use Raindrop\LocaleBundle\Switcher\TargetInformationBuilder;
 
 /**
  * LocaleSwitcherExtension
- * 
+ *
  */
 class LocaleSwitcherExtension extends \Twig_Extension
 {

@@ -15,7 +15,7 @@ class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterfac
 {
     /**
      * @{inheritDoc}
-     */    
+     */
     public function load(ObjectManager $manager)
     {
         $languages = Yaml::parse(__DIR__ . "/../../Resources/data/language.yml");
@@ -27,15 +27,15 @@ class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterfac
             $language->setName($name);
             $manager->persist($language);
         }
-        
+
         $manager->flush();
     }
 
     /**
      * @{inheritDoc}
-     */        
+     */
     public function getOrder()
     {
         return 2;
-    }    
+    }
 }

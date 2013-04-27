@@ -130,7 +130,6 @@ class LocaleValidatorTest extends \PHPUnit_Framework_TestCase
         $this->getLocaleValidator($intlExtension)->validate('de_FR', $constraint);
         $this->getLocaleValidator($intlExtension)->validate('fr_US', $constraint);
 
-
     }
 
     /**

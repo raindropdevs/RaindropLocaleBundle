@@ -14,7 +14,7 @@ class CountryAdmin extends Admin
 {
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -23,10 +23,10 @@ class CountryAdmin extends Admin
             ->add('defaultLanguage')
             ->add('languages');
     }
-    
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -35,14 +35,14 @@ class CountryAdmin extends Admin
             ->add('enabled', null, array('required' => false))
             ->add('defaultLanguage', null, array('required' => false))
             ->add('languages', null, array('required' => false));
-    }   
-    
+    }
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name');
-    }    
+    }
 }

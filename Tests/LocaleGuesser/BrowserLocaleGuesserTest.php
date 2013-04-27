@@ -39,7 +39,6 @@ class BrowserLocaleGuesserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('fr_FR', $guesser->getIdentifiedLocale());
     }
 
-
     public function testLocaleIsIdentifiedFromBrowserTestFallbackForNoIntlExtension()
     {
         $metaValidator = $this->getMetaValidatorMock();

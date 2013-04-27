@@ -3,14 +3,13 @@
 namespace Raindrop\LocaleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="LanguageRepository")
  * @ORM\Table(name="language")
  */
-class Language 
+class Language
 {
     /**
      * @ORM\Id
@@ -18,11 +17,11 @@ class Language
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;    
+    protected $name;
 
     /**
      * @ORM\Column(type="string")
@@ -32,7 +31,7 @@ class Language
      * )
      */
     protected $code;
-    
+
     /**
      * Returns the country unique id.
      *
@@ -42,10 +41,10 @@ class Language
     {
         return $this->id;
     }
-    
+
     /**
      * Set $name
-     * 
+     *
      * @param string $name
      */
     public function setName($name)
@@ -59,11 +58,11 @@ class Language
     public function getName()
     {
         return $this->name;
-    }      
-    
+    }
+
     /**
      * Set $code
-     * 
+     *
      * @param string $code
      */
     public function setCode($code)
@@ -77,8 +76,8 @@ class Language
     public function getCode()
     {
         return $this->code;
-    }   
-    
+    }
+
     /**
      * @return string
      */

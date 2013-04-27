@@ -16,7 +16,7 @@
             factory-service="doctrine"
             factory-method="getRepository">
             <argument>RaindropLocaleBundle:Country</argument>
-        </service> 
+        </service>
 
         <service
             id="raindrop_locale.language.repository"
@@ -24,7 +24,7 @@
             factory-service="doctrine"
             factory-method="getRepository">
             <argument>RaindropLocaleBundle:Language</argument>
-        </service> 
+        </service>
 
         <service
             id="raindrop_locale.international.repository"
@@ -32,7 +32,7 @@
             factory-service="doctrine"
             factory-method="getRepository">
             <argument>RaindropLocaleBundle:International</argument>
-        </service> 
+        </service>
 
     </services>
 </container>

@@ -14,30 +14,30 @@ class LanguageAdmin extends Admin
 {
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('code')
             ->add('name');
     }
-    
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('code')
             ->add('name');
-    }   
-    
+    }
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name');        
-    }    
+            ->add('name');
+    }
 }

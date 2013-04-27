@@ -32,6 +32,6 @@
             <argument>%raindrop_locale.session.variable%</argument>
             <tag name="raindrop_locale.guesser" alias="session"/>
         </service>
-        
+
     </services>
 </container>

@@ -14,7 +14,7 @@ class InternationalAdmin extends Admin
 {
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -22,10 +22,10 @@ class InternationalAdmin extends Admin
             ->add('language')
             ->add('countries');
     }
-    
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $entity = $this->getSubject();
@@ -62,12 +62,12 @@ class InternationalAdmin extends Admin
         $formMapper
             ->add('language', null, array('required' => true, 'query_builder' => $language))
             ->add('countries', null, array('required' => true, 'query_builder' => $country));
-    }   
-    
+    }
+
     /**
      * {@inheritdoc}
-     */    
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-    }    
+    }
 }

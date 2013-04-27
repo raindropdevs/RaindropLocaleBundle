@@ -2,12 +2,12 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    
+
     <parameters>
         <parameter key="raindrop_locale.geoip_guesser.class">Raindrop\LocaleBundle\LocaleGuesser\GeoipLocaleGuesser</parameter>
         <parameter key="raindrop_locale.geoip_listener.class">Raindrop\LocaleBundle\EventListener\GeoipListener</parameter>
-    </parameters>               
-               
+    </parameters>
+
     <services>
 
         <service id="raindrop_locale.geoip_guesser" class="%raindrop_locale.geoip_guesser.class%">
@@ -19,8 +19,8 @@
             </call>
 
             <tag name="raindrop_locale.guesser" alias="geoip" />
-        </service>   
-        
+        </service>
+
         <service id="raindrop_locale.geoip_listener" class="%raindrop_locale.geoip_listener.class%">
             <argument type="service" id="logger" />
             <argument type="service" id="router"/>
@@ -45,7 +45,7 @@
             </call>
 
             <tag name="kernel.event_subscriber"/>
-        </service>   
-        
+        </service>
+
     </services>
 </container>

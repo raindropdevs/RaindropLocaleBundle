@@ -2,7 +2,6 @@
 
 namespace Raindrop\LocaleBundle\EventListener;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -48,11 +47,11 @@ class LocaleUpdateListener implements EventSubscriberInterface
     /**
      * Construct the Locale Update Listener
      *
-     * @param LocaleCookie       $localeCookie       Locale Cookie
-     * @param LocaleSession      $session            Locale Session
-     * @param EventDispatcher    $dispatcher         Event Dispatcher
-     * @param array              $registeredGuessers List of registered guessers
-     * @param LoggerInterface    $logger             Logger
+     * @param LocaleCookie    $localeCookie       Locale Cookie
+     * @param LocaleSession   $session            Locale Session
+     * @param EventDispatcher $dispatcher         Event Dispatcher
+     * @param array           $registeredGuessers List of registered guessers
+     * @param LoggerInterface $logger             Logger
      */
     public function __construct(LocaleCookie $localeCookie,
                                 LocaleSession $session,

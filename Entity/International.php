@@ -4,7 +4,6 @@ namespace Raindrop\LocaleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Raindrop\LocaleBundle\Entity\Country;
 
 /**
@@ -24,20 +23,20 @@ class International
      * @ORM\ManyToMany(targetEntity="Country")
      */
     protected $countries;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Language")
      */
-    protected $language;    
-    
+    protected $language;
+
     /**
      * Constructor.
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->countries = new ArrayCollection();
-    }    
-    
+    }
+
     /**
      * Returns the country unique id.
      *
@@ -47,15 +46,15 @@ class International
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
     public function getCountries()
     {
         return $this->countries;
-    } 
-    
+    }
+
     /**
      * Set $language
      *
@@ -72,26 +71,26 @@ class International
     public function getLanguage()
     {
         return $this->language;
-    }   
-    
+    }
+
     /**
      * @return string
      */
     public function __toString()
     {
         return sprintf("International - %s", $this->getLanguage());
-    }    
+    }
 
     /**
      * Add countries
      *
-     * @param \Raindrop\LocaleBundle\Entity\Country $countries
+     * @param  \Raindrop\LocaleBundle\Entity\Country $countries
      * @return International
      */
     public function addCountrie(\Raindrop\LocaleBundle\Entity\Country $countries)
     {
         $this->countries[] = $countries;
-    
+
         return $this;
     }
 

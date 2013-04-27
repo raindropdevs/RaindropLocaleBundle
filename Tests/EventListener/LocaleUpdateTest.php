@@ -55,7 +55,6 @@ class LocaleUpdateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(array(), $addedListeners);
     }
 
-
     public function testCookieIsUpdatedOnChange()
     {
         $listener = $this->getLocaleUpdateListener(array('cookie'), true);
@@ -150,7 +149,6 @@ class LocaleUpdateTest extends \PHPUnit_Framework_TestCase
     {
         return new FilterResponseEvent($this->getMock('Symfony\Component\HttpKernel\HttpKernelInterface'), $request, HttpKernelInterface::MASTER_REQUEST, new Response);
     }
-
 
     private function getLocaleCookie($updateCookie)
     {

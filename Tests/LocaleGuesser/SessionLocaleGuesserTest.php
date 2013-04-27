@@ -48,7 +48,6 @@ class SessionLocaleGuesserTest extends \PHPUnit_Framework_TestCase
 
     private function getGuesser($session = null, $metaValidator)
     {
-
         return new SessionLocaleGuesser($session, $metaValidator);
     }
 

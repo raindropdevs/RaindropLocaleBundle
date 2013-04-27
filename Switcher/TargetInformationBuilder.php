@@ -54,7 +54,7 @@ class TargetInformationBuilder
      * @param string|null $targetRoute The target route
      * @param array       $parameters  Parameters
      *
-     * @return array           Informations for the switcher template
+     * @return array Informations for the switcher template
      */
     public function getTargetInformations($targetRoute = null, $parameters = array())
     {

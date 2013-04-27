@@ -11,7 +11,7 @@ use Raindrop\LocaleBundle\Entity\Language;
  * @ORM\Entity(repositoryClass="CountryRepository")
  * @ORM\Table(name="country")
  */
-class Country 
+class Country
 {
     /**
      * @ORM\Id
@@ -19,11 +19,11 @@ class Country
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;    
+    protected $name;
 
     /**
      * @ORM\Column(type="string")
@@ -33,7 +33,7 @@ class Country
      * )
      */
     protected $code;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -43,7 +43,7 @@ class Country
      * @ORM\ManyToMany(targetEntity="Language")
      */
     protected $languages;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Language")
      */
@@ -52,11 +52,11 @@ class Country
     /**
      * Constructor.
      */
-    public function __construct() 
+    public function __construct()
     {
         $this->languages = new ArrayCollection();
-    }    
-    
+    }
+
     /**
      * Returns the country unique id.
      *
@@ -66,10 +66,10 @@ class Country
     {
         return $this->id;
     }
-    
+
     /**
      * Set $name
-     * 
+     *
      * @param string $name
      */
     public function setName($name)
@@ -83,11 +83,11 @@ class Country
     public function getName()
     {
         return $this->name;
-    }      
-    
+    }
+
     /**
      * Set $code
-     * 
+     *
      * @param string $code
      */
     public function setCode($code)
@@ -102,10 +102,10 @@ class Country
     {
         return $this->code;
     }
-    
+
     /**
      * Set $enabled
-     * 
+     *
      * @param boolean $enabled
      */
     public function setEnabled($enabled)
@@ -119,8 +119,8 @@ class Country
     public function getEnabled()
     {
         return $this->enabled;
-    }    
-    
+    }
+
     /**
      * Add language
      *
@@ -129,8 +129,8 @@ class Country
     public function addLanguage(Language $language)
     {
         $this->languages[] = $language;
-    }    
-    
+    }
+
     /**
      * @return string
      */

@@ -94,7 +94,7 @@ class LocaleGuesserManager
      * @throws InvalidConfigurationException
      *
      * @return boolean false if no locale is identified
-     * @return bool the locale identified by the guessers
+     * @return bool    the locale identified by the guessers
      */
     public function runLocaleGuessing(Request $request)
     {

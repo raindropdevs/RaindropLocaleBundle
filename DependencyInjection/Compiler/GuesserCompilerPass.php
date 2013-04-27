@@ -36,4 +36,3 @@ class GuesserCompilerPass implements CompilerPassInterface
         }
     }
 }
-

@@ -116,7 +116,6 @@ class ConstraintValidatorFactory implements \Symfony\Component\Validator\Constra
             $this->validators[$className] = $this->localeAllowedValidator;
         }
 
-
         return $this->validators[$className];
     }
 }
