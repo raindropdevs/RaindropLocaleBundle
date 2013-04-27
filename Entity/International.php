@@ -87,7 +87,7 @@ class International
      * @param  \Raindrop\LocaleBundle\Entity\Country $countries
      * @return International
      */
-    public function addCountrie(\Raindrop\LocaleBundle\Entity\Country $countries)
+    public function addCountry(Country $countries)
     {
         $this->countries[] = $countries;
 
@@ -99,7 +99,7 @@ class International
      *
      * @param \Raindrop\LocaleBundle\Entity\Country $countries
      */
-    public function removeCountrie(\Raindrop\LocaleBundle\Entity\Country $countries)
+    public function removeCountry(Country $countries)
     {
         $this->countries->removeElement($countries);
     }
