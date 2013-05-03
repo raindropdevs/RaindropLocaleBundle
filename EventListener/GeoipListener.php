@@ -114,6 +114,7 @@ class GeoipListener implements EventSubscriberInterface
                 } else {
                     // country enabled
                     $locale = $this->allowedLocalesProvider->getDefaultLanguageByCountry($countryCode);
+                    $locale .= '_' . $countryCode;
                 }
                 // home page whit locale
                 $route = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBaseUrl() . '/' . $locale;
