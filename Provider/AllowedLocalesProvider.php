@@ -21,6 +21,11 @@ class AllowedLocalesProvider
     protected $entityManager;
 
     /**
+     * @var string $internationalCountryCode
+     */
+    protected $internationalCountryCode;
+
+    /**
      * @var array
      */
     private $allowedLocales;
@@ -30,12 +35,14 @@ class AllowedLocalesProvider
      *
      * @param LoggerInterface $logger
      * @param EntityManager   $entityManager
-     * @param array           $allowedLocales List of allowed locales from configuration
+     * @param string          $internationalCountryCode
+     * @param array           $allowedLocales           List of allowed locales from configuration
      */
-    public function __construct(LoggerInterface $logger, EntityManager $entityManager, array $allowedLocales = array())
+    public function __construct(LoggerInterface $logger, EntityManager $entityManager, $internationalCountryCode, array $allowedLocales = array())
     {
         $this->logger = $logger;
         $this->em = $entityManager;
+        $this->internationalCountryCode = $internationalCountryCode;
         $this->allowedLocales = $allowedLocales;
     }
 

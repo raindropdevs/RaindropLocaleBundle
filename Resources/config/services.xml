@@ -62,6 +62,7 @@
         <service id="raindrop_locale.allowed_locales.provider" class="%raindrop_locale.allowed_locales.provider.class%">
             <argument type="service" id="logger" />
             <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument>%raindrop_locale.geoip.international_country_code%</argument>
         </service>
     </services>
 </container>
