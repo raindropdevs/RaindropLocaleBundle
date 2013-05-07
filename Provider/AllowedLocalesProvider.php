@@ -151,4 +151,22 @@ class AllowedLocalesProvider
 
         return $result;
     }
+
+    /**
+     * Returns the allowed countries
+     *
+     * @return array
+     */
+    public function getAllowedCountriesAndInternationalCountries()
+    {
+        $country = $this->em->getRepository('RaindropLocaleBundle:Country')
+                ->findAllowedCountries();
+
+        $international = $this->em->getRepository('RaindropLocaleBundle:International')
+                ->findAllowedCountries($this->internationalCountryCode);
+
+       $result = array_merge($country, $international);
+
+        return $result;
+    }
 }

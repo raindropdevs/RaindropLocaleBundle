@@ -101,4 +101,27 @@ class InternationalRepository extends EntityRepository
 
         return $result;
     }
+
+    /**
+     * Find the allowed countries
+     *
+     * @param  string $internationalCountryCode
+     * @return array
+     */
+    public function findAllowedCountries($internationalCountryCode = 'JJ')
+    {
+        $query = $this->createQueryBuilder('i')
+                ->select('i', 'l')
+                ->leftJoin('i.language', 'l')
+                ->getQuery()
+                ->getResult();
+
+        $result = array();
+
+        foreach ($query as $country) {
+            $result[] = $internationalCountryCode . strtoupper($country->getLanguage()->getCode());
+        }
+
+        return $result;
+    }
 }
