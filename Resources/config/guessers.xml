@@ -33,5 +33,10 @@
             <tag name="raindrop_locale.guesser" alias="session"/>
         </service>
 
+        <service id="raindrop_locale.sonata_guesser" class="%raindrop_locale.sonata_guesser.class%">
+            <argument type="service" id="raindrop_locale.validator.meta" />
+            <tag name="raindrop_locale.guesser" alias="sonata"/>
+        </service>
+
     </services>
 </container>
