@@ -75,7 +75,7 @@ class AllowedLocalesProvider
 
         // find international countries locale
         $international = $this->em->getRepository('RaindropLocaleBundle:International')
-                ->findAllowedLocales();
+                ->findAllowedLocales($this->internationalCountryCode);
 
         $result = array_merge($country, $international);
 
@@ -145,7 +145,7 @@ class AllowedLocalesProvider
                 ->findCountryList();
 
         $international = $this->em->getRepository('RaindropLocaleBundle:International')
-                ->findCountryList();
+                ->findCountryList($this->internationalCountryCode);
 
         $result = array_merge($country, $international);
 

@@ -59,9 +59,10 @@ class InternationalRepository extends EntityRepository
     /**
      * Find allowed locales (language_COUNTRY)
      *
+     * @param  string $internationalCountryCode
      * @return array
      */
-    public function findAllowedLocales()
+    public function findAllowedLocales($internationalCountryCode = 'JJ')
     {
         $query = $this->createQueryBuilder('i')
                 ->select('i', 'l')
@@ -72,7 +73,7 @@ class InternationalRepository extends EntityRepository
         $result = array();
 
         foreach ($query as $country) {
-            $result[] = $country->getLanguage()->getCode() . '_JJ' . strtoupper($country->getLanguage()->getCode());
+            $result[] = $country->getLanguage()->getCode() . '_' . $internationalCountryCode;
         }
 
         return $result;
@@ -81,9 +82,10 @@ class InternationalRepository extends EntityRepository
     /**
      * Find international countries
      *
+     * @param  string $internationalCountryCode
      * @return array
      */
-    public function findCountryList()
+    public function findCountryList($internationalCountryCode = 'JJ')
     {
         $query = $this->createQueryBuilder('i')
                 ->select('i', 'l')
@@ -94,7 +96,7 @@ class InternationalRepository extends EntityRepository
         $result = array();
 
         foreach ($query as $country) {
-            $result['JJ' . strtoupper($country->getLanguage()->getCode())] = $country->getLanguage()->getCode();
+            $result[$internationalCountryCode . strtoupper($country->getLanguage()->getCode())] = $country->getLanguage()->getCode();
         }
 
         return $result;
