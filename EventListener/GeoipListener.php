@@ -150,7 +150,7 @@ class GeoipListener implements EventSubscriberInterface
         }
 
         foreach ($this->exclude as $exclude) {
-            if (strpos($name, $exclude ) === false) {
+            if (strpos($name, $exclude ) !== false) {
                 return true;
             }
         }
