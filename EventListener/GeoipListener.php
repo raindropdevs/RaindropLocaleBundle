@@ -139,8 +139,9 @@ class GeoipListener implements EventSubscriberInterface
     }
 
     /**
-     *
-     * @param type $name
+     * Check if a route must be excluded from listener flow
+     * 
+     * @param string $name
      */
     public function checkExclude($name)
     {
