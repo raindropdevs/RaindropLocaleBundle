@@ -46,6 +46,11 @@ class GeoipListener implements EventSubscriberInterface
     protected $sessionVariable;
 
     /**
+     * @var array $exclude
+     */
+    protected $exclude;
+
+    /**
      * @var GeoipManager
      */
     private $geoip;
@@ -67,13 +72,15 @@ class GeoipListener implements EventSubscriberInterface
      * @param RouterInterface $router
      * @param Session         $session
      * @param string          $sessionVariable
+     * @param array           $exclude
      */
-    public function __construct(LoggerInterface $logger, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale')
+    public function __construct(LoggerInterface $logger, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale', $exclude = array())
     {
         $this->logger = $logger;
         $this->router = $router;
         $this->session = $session;
         $this->sessionVariable = $sessionVariable;
+        $this->exclude = $exclude;
     }
 
     /**
@@ -86,8 +93,9 @@ class GeoipListener implements EventSubscriberInterface
     {
         $request = $event->getRequest();
         $clientIp = $request->getClientIp();
+        $route = $request->attributes->get('_route');
 
-        if (!$this->session->has($this->sessionVariable)) {
+        if (!$this->session->has($this->sessionVariable) && !$this->checkExclude($route)) {
             // Get the country code / locale
             $countryCode = $this->geoip->getCountryCode($clientIp);
 
@@ -128,6 +136,25 @@ class GeoipListener implements EventSubscriberInterface
             $response = new RedirectResponse($route);
             $event->setResponse($response);
         }
+    }
+
+    /**
+     *
+     * @param type $name
+     */
+    public function checkExclude($name)
+    {
+        if (empty ($this->exclude)) {
+            return false;
+        }
+
+        foreach ($this->exclude as $exclude) {
+            if (strpos($name, $exclude ) === false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
