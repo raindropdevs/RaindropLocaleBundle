@@ -26,7 +26,7 @@
             <argument type="service" id="router"/>
             <argument type="service" id="session"/>
             <argument>%raindrop_locale.session.variable%</argument>
-            <argument>%raindrop_locale.geoip.exclude_from_listener%</argument>
+            <argument>%raindrop_locale.geoip.include_in_listener%</argument>
 
             <call method="setEventDispatcher">
                 <argument type="service" id="event_dispatcher"/>

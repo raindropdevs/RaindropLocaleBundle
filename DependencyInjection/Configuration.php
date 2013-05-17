@@ -131,7 +131,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('redirect_to_choose_country_route')->defaultNull()->end()
                         ->scalarNode('international_country_code')->defaultNull()->end()
-                        ->arrayNode('exclude_from_listener')
+                        ->arrayNode('include_in_listener')
                             ->requiresAtLeastOneElement()
                             ->prototype('scalar')->end()
                         ->end()

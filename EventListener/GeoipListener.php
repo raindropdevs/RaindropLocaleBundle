@@ -46,9 +46,9 @@ class GeoipListener implements EventSubscriberInterface
     protected $sessionVariable;
 
     /**
-     * @var array $exclude
+     * @var array $include
      */
-    protected $exclude;
+    protected $include;
 
     /**
      * @var GeoipManager
@@ -72,15 +72,15 @@ class GeoipListener implements EventSubscriberInterface
      * @param RouterInterface $router
      * @param Session         $session
      * @param string          $sessionVariable
-     * @param array           $exclude
+     * @param array           $include
      */
-    public function __construct(LoggerInterface $logger, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale', $exclude = array())
+    public function __construct(LoggerInterface $logger, RouterInterface $router, Session $session, $sessionVariable = 'raindrop_locale', $include = array())
     {
         $this->logger = $logger;
         $this->router = $router;
         $this->session = $session;
         $this->sessionVariable = $sessionVariable;
-        $this->exclude = $exclude;
+        $this->include = $include;
     }
 
     /**
@@ -95,7 +95,7 @@ class GeoipListener implements EventSubscriberInterface
         $clientIp = $request->getClientIp();
         $route = $request->attributes->get('_route');
 
-        if (!$this->session->has($this->sessionVariable) && !$this->checkExclude($route)) {
+        if (!$this->session->has($this->sessionVariable) && $this->checkInclude($route)) {
             // Get the country code / locale
             $countryCode = $this->geoip->getCountryCode($clientIp);
 
@@ -139,18 +139,18 @@ class GeoipListener implements EventSubscriberInterface
     }
 
     /**
-     * Check if a route must be excluded from listener flow
-     * 
-     * @param string $name
+     * Check if a route must be included in the listener flow
+     *
+     * @param string $route
      */
-    public function checkExclude($name)
+    public function checkInclude($route)
     {
-        if (empty ($this->exclude)) {
+        if (empty ($this->include)) {
             return false;
         }
 
-        foreach ($this->exclude as $exclude) {
-            if (strpos($name, $exclude ) !== false) {
+        foreach ($this->include as $include) {
+            if (strpos($route, $include) !== false) {
                 return true;
             }
         }
