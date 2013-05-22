@@ -159,14 +159,11 @@ class AllowedLocalesProvider
      */
     public function getAllowedCountriesAndInternationalCountries()
     {
-        $country = $this->em->getRepository('RaindropLocaleBundle:Country')
+        $countries = $this->em->getRepository('RaindropLocaleBundle:Country')
                 ->findAllowedCountries();
 
-        $international = $this->em->getRepository('RaindropLocaleBundle:International')
-                ->findAllowedCountries($this->internationalCountryCode);
+        array_push($countries, $this->internationalCountryCode);
 
-       $result = array_merge($country, $international);
-
-        return $result;
+        return $countries;
     }
 }
