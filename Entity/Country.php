@@ -139,6 +139,11 @@ class Country
         return $this->languages;
     }
 
+    public function setLanguages($languages)
+    {
+        $this->languages = $languages;
+    }
+
     /**
      * Set $defaultLanguage
      *
