@@ -33,7 +33,7 @@ class CountryRepository extends EntityRepository
             }
         }
 
-        return $result;
+        return array_unique($result);
     }
 
     /**
@@ -101,7 +101,7 @@ class CountryRepository extends EntityRepository
                 $lang[] = $language->getCode();
             }
 
-            $result[$country->getCode()] = $lang;
+            $result[$country->getCode()] = array_unique($lang);
         }
 
         return $result;
