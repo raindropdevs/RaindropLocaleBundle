@@ -61,7 +61,7 @@ class InternationalAdmin extends Admin
 
         $formMapper
             ->add('language', null, array('required' => true, 'query_builder' => $language))
-            ->add('countries', null, array('required' => true, 'query_builder' => $country));
+            ->add('countries', null, array('required' => false, 'query_builder' => $country));
     }
 
     /**
