@@ -128,7 +128,7 @@ class AllowedLocalesProvider
      */
     public function getLanguageByInternationalCountry($countryCode)
     {
-        $result = $this->em->getRepository('RaindropLocaleBundle:Country')
+        $result = $this->em->getRepository('RaindropLocaleBundle:International')
                 ->findLanguageByInternationalCountry($countryCode);
 
         return $result;
